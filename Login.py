@@ -6,8 +6,9 @@ import xlrd
 import uuid
 # from MainPage import *
   
-class LoginPage(object): 
-	def __init__(self, master=None): 
+class LoginPage(object):
+
+	def __init__(self, master=None):
 		self.root = master #定义内部变量root 
 		self.root.geometry('%dx%d' % (300, 180)) #设置窗口大小 
 		self.username = StringVar() 

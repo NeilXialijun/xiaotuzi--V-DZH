@@ -2,27 +2,27 @@
 from mousePrint import *
 from opencvCC import *
 from xlutils.copy import copy
-# from tkinter import Tk, Button, Canvas, ttk
-from tkinter import ttk
+from tkinter import Tk, Button, Canvas, ttk, Frame, Label
 from PIL import Image, ImageTk, ImageFont
+import re
 
-from tkinter import *
+from tkinter import Text, IntVar, Entry, LEFT, StringVar, BOTH, END, LEFT
 import threading
-#import string
-#import time
+import string
+import time
 #import cv2 as cv
-#import numpy as np
+import numpy as np
 #import requests
 import xlwt
 import xlrd
-#import datetime
-#import uuid
+import datetime
+# import uuid
 #import multiprocessing
 
 class Application(object):
 
     def __init__(self, master=None):
-        self.root = master #定义内部变量root
+        self.root = master    #    定义内部变量root
         self.root.geometry('660x410')
 
         # # 创建一个容器,
@@ -34,8 +34,6 @@ class Application(object):
         self.num_f.place(x=0, y=255, anchor="nw", width=650, height=150)
         self.frm_num = Frame(self.num_f)
 
-
-		
         self.clean_coordinate_str = ""
         self.final_data = ""
         self.results_not_count = 0
@@ -49,10 +47,10 @@ class Application(object):
         self.excel_init()
         self.excel_test_init()
         self.excel_auto_click_init()
-		
+
         self.createWidgets()
         self.start_display_xy_thread()
-		
+
     def get_clean_coordinate(self):
         self.clean_coordinate_str = self.clean_pixel.get()
         list1 = self.clean_coordinate_str.split('-', 9)
@@ -66,7 +64,7 @@ class Application(object):
         self.pattern = xlwt.Pattern()  # Create the Pattern
         self.pattern.pattern = xlwt.Pattern.SOLID_PATTERN  # May be: NO_PATTERN, SOLID_PATTERN, or 0x00 through 0x12
         self.pattern.pattern_fore_colour = 1
-        # May be: 8 through 63. 0 = Black, 1 = White, 2 = Red, 3 = Green, 4 = Blue, 5 = Yellow, 6 = Magenta, 7 = Cyan, 16 = Maroon, 17 = Dark Green, 18 = Dark Blue, 19 = Dark Yellow , almost brown), 20 = Dark Magenta, 21 = Teal, 22 = Light Gray, 23 = Dark Gray, the list goes on...
+        #  May be: 8 through 63. 0 = Black, 1 = White, 2 = Red, 3 = Green, 4 = Blue, 5 = Yellow, 6 = Magenta, 7 = Cyan, 16 = Maroon, 17 = Dark Green, 18 = Dark Blue, 19 = Dark Yellow , almost brown), 20 = Dark Magenta, 21 = Teal, 22 = Light Gray, 23 = Dark Gray, the list goes on...
         self.style = xlwt.XFStyle()  # Create the Pattern
         self.styleBlueBkg = xlwt.easyxf('pattern: pattern solid, fore_colour red;')  # 红色
 
@@ -75,15 +73,13 @@ class Application(object):
         self.worksheet.write(0, 0, '期数', self.style)
         self.worksheet.write(0, 1, '号码', self.style)
 
-
-
     def createWidgets(self):
         self.frm_x = Frame(self.frm)
-        self.Label1 = Label(self.frm_x, text='X坐标开始:', justify=LEFT).grid(row=0, column=0)
+        self.Label1 = Label(self.frm_x, text='X坐标开始:').grid(row=0, column=0)
         self.frm_x.place(x=0, y=50)
 
         self.frm_y = Frame(self.frm)
-        self.Label2 = Label(self.frm_y, text='Y坐标开始:', justify=LEFT).grid(row=0, column=2)
+        self.Label2 = Label(self.frm_y, text='Y坐标开始:').grid(row=0, column=2)
         self.frm_y.place(x=100, y=50)
 
         self.X_coordinate = IntVar()
@@ -112,12 +108,12 @@ class Application(object):
 
         self.test_BT = Frame(self.frm)
         Button(self.test_BT, text='开始测试', width=10, command=self.TestStart) \
-            .grid(row=0, column=4, sticky=E, padx=1, pady=1)
+            .grid(row=0, column=4, padx=1, pady=1)
         self.test_BT.place(x=550, y=25)
 
         self.start_BT = Frame(self.frm)
         Button(self.start_BT, text='开始铺抓', width=10, command=self.start_auto_thread) \
-            .grid(row=0, column=4, sticky=E, padx=1, pady=1)
+            .grid(row=0, column=4, padx=1, pady=1)
         self.start_BT.place(x=550, y=150)
 
 
@@ -171,20 +167,20 @@ class Application(object):
 
         self.num_NO_f  = Frame(self.num_f)
         Button(self.num_NO_f, text='名号测试', width=10, command=lambda: auto_click.NO_Num_BT(auto_click, self.aotu_click_sheet)) \
-            .grid(row=0, column=4, sticky=E, padx=1, pady=1)
+            .grid(row=0, column=4, padx=1, pady=1)
         # Button(self.num_NO_f, text='名号测试', width=10, command='') \
         #     .grid(row=0, column=4, sticky=E, padx=1, pady=1)
         self.num_NO_f.place(x=50, y=85)
 
         self.M_f = Frame(self.num_f)
         Button(self.M_f, text='M 测试', width=10, command=lambda: auto_click.M_BT(auto_click, self.aotu_click_sheet)) \
-            .grid(row=0, column=4, sticky=E, padx=1, pady=1)
+            .grid(row=0, column=4, padx=1, pady=1)
         self.M_f.place(x=150, y=85)
 
         self.M_list = self.M_enter_s.get()
         self.reality_f = Frame(self.num_f)
         Button(self.reality_f, text='真实模拟测试', width=10, command=lambda: auto_click.reality_BT(auto_click, self.aotu_click_sheet)) \
-            .grid(row=0, column=4, sticky=E, padx=1, pady=1)
+            .grid(row=0, column=4, padx=1, pady=1)
         self.reality_f.place(x=250, y=85)
 
         self.periods_select = Frame(self.num_f)
@@ -201,7 +197,7 @@ class Application(object):
         # self.number_of_periods = 140
         self.test_f = Frame(self.num_f)
         Button(self.test_f, text='暂时测试', width=10, command=lambda: self.test_BT_fun()) \
-            .grid(row=0, column=4, sticky=E, padx=1, pady=1)
+            .grid(row=0, column=4, padx=1, pady=1)
         self.test_f.place(x=550, y=85)
 
     def get_M_num_data(self):
@@ -238,7 +234,7 @@ class Application(object):
             # 保存 跟下一次比较
             self.The_lottery_results_old = temp
             
-            self.periods = self.periods +1 # 测试BT 专用
+            self.periods = self.periods + 1   # 测试BT 专用
 
         self.ExcelFile_test1.save('test_BT_fun.xls')
 # -----------------------------------------------------------------------------------------------------
@@ -263,7 +259,6 @@ class Application(object):
         self.display_Endimg()
 
         temp = []
-        # temp = [int(i) for i in self.final_data]
         temp = list(map(int, re.compile(r'(10|[1-9])').findall(self.final_data)))
         # temp 就是最后的数组
         return temp
@@ -328,18 +323,8 @@ class Application(object):
             
                 self.number_of_periods = count / 5
                 self.number_of_periods = int(self.number_of_periods)
-                # 开幕数据
-                # self.The_lottery_results = self.TestStart()
-                # print(self.The_lottery_results)
-                # 第一次 保留数据 不动作
-                # if self.The_lottery_results_old is None:
-                    # self.The_winning_recognition(self.The_lottery_results)
 
                 self.The_winning_recognition(self.The_lottery_results)
-
-
-                # 比价数据  是否  z  j
-                # self.The_winning_recognition(self.The_lottery_results)
 
                 # 保存 跟下一次比较
                 self.The_lottery_results_old = self.The_lottery_results
@@ -366,18 +351,19 @@ class Application(object):
         
         # 保存数据上色标志
         marked = 0
-		
-        # ZJ 判断
+
+         # ZJ 判断
         if results[temp1] in self.num_list:
             print("Z J....！！！！！")
-            marked  =  1
+            marked = 1
+            
             if self.bet_flag == 1:
                 self.bet_count = 0
-                self.bet_flag  = 0
+                self.bet_flag = 0
             self.results_not_count = 0
         else:
             self.results_not_count = self.results_not_count + 1
-            if self.results_not_count >= int(self.comboxlist.get()) or self.bet_flag == 1 :
+            if self.results_not_count >= int(self.comboxlist.get()) or self.bet_flag == 1:
                 self.bet_flag = 1
                 temp1 = (self.number_of_periods % 10) + 1   # 因为是压下 一期的
                 
@@ -385,11 +371,10 @@ class Application(object):
                 self.worksheet.write((self.periods+1), 3, ("%s")%(self.M_list[self.bet_count]), self.style)  # 期数
 
                 # self.test_sheet1.write(self.periods, 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 测试BT专用
-                
 
                 print("投入M %d  。。。" %self.M_list[self.bet_count])
                 self.bet_count = self.bet_count + 1
-                print(" bet  on    ....！！！！！")
+                print("bet  on    ....！！！！！")
 
         if self.bet_count > len(self.M_list):
             self.bet_count = 0
@@ -401,20 +386,20 @@ class Application(object):
 
         # 保存原始数据，
         self.save_excel(marked)
-		
+
         print("now 没z 计数 %d   ====================="%self.results_not_count)
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     def display_img(self):
         self.frm_p = Frame(self.frm)
-        self.im = Image.open("5.jpg")
+        self.im = Image.open(r"E:\xiaotuzi\5.jpg")
         self.img = ImageTk.PhotoImage(self.im)
         self.imLabel = Label(self.frm_p, image=self.img).grid(row=0, column=0)
         self.frm_p.place(x=0, y=0)
 
     def display_Endimg(self):
         self.frm_p1 = Frame(self.frm)
-        self.im1 = Image.open("66.jpg")
+        self.im1 = Image.open(r"E:\xiaotuzi\66.jpg")
         self.img1 = ImageTk.PhotoImage(self.im1)
         self.imLabel = Label(self.frm_p1, image=self.img1).grid(row=0, column=0)
         self.frm_p1.place(x=0, y=100)

@@ -4,20 +4,6 @@ import win32gui
 from ctypes import *
 import time
 
-#from opencvCC import *
-# from tkinter import Tk, Button, Canvas, ttk
-# from PIL import Image, ImageTk, ImageFont
-# import threading
-# import string
-
-# import cv2 as cv
-# import numpy as np
-# import requests
-# import xlrd
-# import datetime
-
-
-
 class POINT(Structure):
     _fields_ = [("x", c_ulong),("y", c_ulong)]
 
@@ -63,58 +49,63 @@ class auto_click():
     def excel_init(self):
         #文件打开
         ExcelFile=xlrd.open_workbook(r'E:\xiaotuzi\auto_click.xls')
-        print (ExcelFile.sheet_names())
+        print(ExcelFile.sheet_names())
         # 点击 坐标打开
         self.aotu_click = ExcelFile.sheet_by_name(r'E:\xiaotuzi\auto_click.xls')
         try :
             self.aotu_click1 = ExcelFile.sheet_by_name(r'E:\xiaotuzi\auto_click.xls')
             
         except :
-            print ("no more aotu_click date1")
+            print("no more aotu_click date1")
         
         try :
             self.aotu_click2 = ExcelFile.sheet_by_name(r'E:\xiaotuzi\auto_click.xls')
             
         except :
-            print ("no more aotu_click date2")
+            print("no more aotu_click date2")
            
         # 数据 记录
         self.data_logging = ExcelFile.sheet_by_name('data_logging')
 
     def M_number_Enter_all(self, M_Enter, aotu_click):
-        if M_Enter > 1000:
+        if M_Enter >= 1000:
             M_temp_q = int(M_Enter/1000)
             M_temp_b = int((M_Enter%1000)/100)
             M_temp_s = int((M_Enter%100)/10)
             M_temp_g = int(M_Enter%10)
-
+            time.sleep(0.6)
             self.M_number_Enter(self, M_temp_q, aotu_click)
+            time.sleep(0.6)
             self.M_number_Enter(self, M_temp_b, aotu_click)
+            time.sleep(0.6)
             self.M_number_Enter(self, M_temp_s, aotu_click)
+            time.sleep(0.6)
             self.M_number_Enter(self, M_temp_g, aotu_click)
-            time.sleep(0.7)
 
-        elif  M_Enter > 100:
+        elif M_Enter >= 100:
             M_temp_b = int((M_Enter%1000)/100)
             M_temp_s = int((M_Enter%100)/10)
             M_temp_g = int(M_Enter%10)
-
-            self.M_number_Enter(self, M_temp_b, aotu_click)
-            self.M_number_Enter(self, M_temp_s, aotu_click)
-            self.M_number_Enter(self, M_temp_g, aotu_click)
             time.sleep(0.6)
+            self.M_number_Enter(self, M_temp_b, aotu_click)
+            time.sleep(0.6)
+            self.M_number_Enter(self, M_temp_s, aotu_click)
+            time.sleep(0.6)
+            self.M_number_Enter(self, M_temp_g, aotu_click)
 
-        elif  M_Enter > 10:
+        elif M_Enter >= 10:
             M_temp_s = int((M_Enter%100)/10)
             M_temp_g = int(M_Enter%10)
 
             self.M_number_Enter(self, M_temp_s, aotu_click)
+            time.sleep(0.6)
             self.M_number_Enter(self, M_temp_g, aotu_click)
-            time.sleep(0.3)
+            time.sleep(0.6)
 
         else:
+            time.sleep(0.6)
             self.M_number_Enter(self, M_Enter, aotu_click)
-            time.sleep(0.5)
+
 
     def M_number_Enter(self, M_Enter, aotu_click):
         if M_Enter >= 0 and M_Enter < 11:
@@ -132,7 +123,7 @@ class auto_click():
 
         # 选 号 1~ 10
     def number_enter_for_list(self, Num_Enter_List, aotu_click):
-    
+
         for i in Num_Enter_List:
             # 获取名次坐标
             ranking_data = aotu_click.cell_value(1, i)
@@ -228,6 +219,7 @@ class auto_click():
                 list1 = list(map(int, list1))
                 print(list1)
                 mouse_click(list1[0], list1[1])
+                time.sleep(0.3)
             else:
                 print("%d is None" % i)
                 return
@@ -244,6 +236,7 @@ class auto_click():
                 list1 = list(map(int, list1))
                 print(list1)
                 mouse_click(list1[0], list1[1])
+                time.sleep(0.3)
 
             else:
                 print("%d is None" % i)
@@ -260,6 +253,7 @@ class auto_click():
                 list1 = list(map(int, list1))
                 print(list1)
                 mouse_click(list1[0], list1[1])
+                time.sleep(0.3)
 
             else:
                 print("%d is None" % i)
@@ -277,26 +271,30 @@ class auto_click():
     # 入 M  整套 测试    
     def reality_BT(self, aotu_click):
         self.ranking_selection(self, 1, aotu_click)
-        self.number_enter(self, 2, aotu_click)
-        self.select_enterM(self, aotu_click)
         time.sleep(0.5)
-        self.M_number_Enter(self, 5, aotu_click)
+        self.number_enter(self, 2, aotu_click)
+        time.sleep(0.5)
+        self.select_enterM(self, aotu_click)
+        time.sleep(0.8)
+        # self.M_number_Enter(self, 10, aotu_click)
+        self.M_number_Enter_all(self, 1, aotu_click)
+        time.sleep(0.5)
         self.Down_enterM(self, aotu_click)
         time.sleep(0.5)
         self.Down_confirmM(self, aotu_click)
         
     def reality_bet(self, ranking, number, M, aotu_click):
         self.ranking_selection(self, ranking, aotu_click)
-        time.sleep(0.5)
+        time.sleep(1)
         self.number_enter_for_list(self, number, aotu_click)
-
+        time.sleep(1)
         self.select_enterM(self, aotu_click)
-        time.sleep(0.8)
+        time.sleep(1)
 
         self.M_number_Enter_all(self, M, aotu_click)
-
+        time.sleep(1)
         self.Down_enterM(self, aotu_click)
-        time.sleep(0.6)
+        time.sleep(1)
         self.Down_confirmM(self, aotu_click)
-        time.sleep(0.8)
-        self.clean_all(self,aotu_click)
+        time.sleep(5)
+        self.clean_all(self, aotu_click)

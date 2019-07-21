@@ -8,7 +8,7 @@ import requests
 # from tkinter import *
 import cv2
 from PIL import Image
-# import pytesseract
+import pytesseract
 # import io
 # import sys
 import numpy as np
