@@ -71,7 +71,7 @@ class LoginPage(object):
 		print("mac = %d"%my_mac)
 		print("enter = %d "%enter1)
 		
-		if my_mac == enter:
+		if my_mac == enter1:
 			
 			print(" 校验正确")
 			#self.excel_sheet.write(8, 0, enter1)
