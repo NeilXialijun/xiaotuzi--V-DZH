@@ -73,7 +73,3 @@ def processor_discern(img, test_list):
     # 识别文字
     # text = pytesseract.image_to_string(Image.open('66.jpg'))
     # print(text)
-
-if __name__ == "__main__":
-    while True:
-        get_mouse_point()

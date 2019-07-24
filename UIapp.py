@@ -6,7 +6,7 @@ from tkinter import Tk, Button, Canvas, ttk, Frame, Label
 from PIL import Image, ImageTk, ImageFont
 import re
 
-from tkinter import Text, IntVar, Entry, LEFT, StringVar, BOTH, END, LEFT
+from tkinter import Text, IntVar, Entry, LEFT, StringVar, BOTH, END, LEFT, DISABLED
 import threading
 import string
 import time
@@ -24,6 +24,7 @@ class Application(object):
     def __init__(self, master=None):
         self.root = master    #    定义内部变量root
         self.root.geometry('660x410')
+        self.root.resizable(0,0)
 
         # # 创建一个容器,
         self.frm = ttk.LabelFrame(self.root, text="图片处理")     # 创建一个容器，其父容器为win
@@ -42,7 +43,8 @@ class Application(object):
         self.The_lottery_results_old = []
         self.The_lottery_results = []
         self.periods = 0
-
+        self.event = threading.Event();
+        self.auto_thread = None
         # self.pack(expand=YES, fill=BOTH)
         self.excel_init()
         self.excel_test_init()
@@ -51,12 +53,21 @@ class Application(object):
         self.createWidgets()
         self.start_display_xy_thread()
 
+
     def get_clean_coordinate(self):
         self.clean_coordinate_str = self.clean_pixel.get()
-        list1 = self.clean_coordinate_str.split('-', 9)
-        list1 = list(map(int, list1))
+        list1 = []
+        if self.clean_coordinate_str == '' or self.clean_coordinate_str == "请输入坐标":
+            self.e6.delete(0, END)
+            self.e6.insert(0, "请输入坐标")
+            return [50, 100, 150, 200, 250, 300, 350, 400, 450, 500]
+        try:
+            list1 = self.clean_coordinate_str.split('-', 9)
+            list1 = list(map(int, list1))
+        except ValueError:
+            pass
         return list1
-        
+
     def excel_init(self):
         self.workbook = xlwt.Workbook()
         self.data = time.strftime('%Y-%m-%d', time.localtime(time.time()))
@@ -111,10 +122,16 @@ class Application(object):
             .grid(row=0, column=4, padx=1, pady=1)
         self.test_BT.place(x=550, y=25)
 
-        self.start_BT = Frame(self.frm)
-        Button(self.start_BT, text='开始铺抓', width=10, command=self.start_auto_thread) \
-            .grid(row=0, column=4, padx=1, pady=1)
-        self.start_BT.place(x=550, y=150)
+        self.start_BT_F = Frame(self.frm)
+        self.start_BT = Button(self.start_BT_F, text='停止铺抓', width=10, command=self.stop_thread)
+        self.start_BT .grid(row=0, column=4, padx=1, pady=1)
+        self.start_BT_F.place(x=550, y=80)
+
+
+        self.start_BT_F = Frame(self.frm)
+        self.start_BT = Button(self.start_BT_F, text='开始铺抓', width=10, command=self.start_auto_thread)
+        self.start_BT .grid(row=0, column=4, padx=1, pady=1)
+        self.start_BT_F.place(x=550, y=150)
 
 
 # # -------------清理条 输入 ---------------------------------------------------------
@@ -130,7 +147,6 @@ class Application(object):
         self.mouse_f = Frame(self.frm)
         self.mouse_l = Label(self.mouse_f, text='坐标:', justify=LEFT).grid(row=0, column=11)
 
-
         self.set_xy = StringVar()
         self.Temp = ("%s.%s") % get_mouse_point()
         self.e7 = Entry(self.mouse_f, width=10, textvariable=self.Temp)
@@ -142,7 +158,6 @@ class Application(object):
         self.recognition_f = Frame(self.frm)
         self.recognition_l = Label(self.recognition_f, text='识别结果:', justify=LEFT).grid(row=0, column=11)
 
-        # self.mounse = StringVar()
         self.e8 = Entry(self.recognition_f, width=50, textvariable=self.final_data)
         self.e8 .grid(row=0, column=12, padx=1, pady=1)
         self.recognition_f.place(x=50, y=180)
@@ -188,7 +203,7 @@ class Application(object):
 
         self.comvalue = StringVar()  # 窗体自带的文本，新建一个值
         self.comboxlist = ttk.Combobox(self.periods_select, width=3, textvariable=self.comvalue)  # 初始化
-        self.comboxlist["values"] = (0, 1, 2, 3, 4, 5, 6, 7, 8)
+        self.comboxlist["values"] = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         self.comboxlist.current(6)  # 选择第一个
         self.comboxlist.grid(row=0, column=6)
         self.periods_select.place(x=450, y=8)
@@ -200,16 +215,38 @@ class Application(object):
             .grid(row=0, column=4, padx=1, pady=1)
         self.test_f.place(x=550, y=85)
 
+    def stop_thread(self):
+        # _async_raise(self.auto_thread.ident, SystemExit)
+        # ._Thread__stop()
+        # pinger_instance.self.auto_thread.is_set()
+        # self.auto_thread.join()
+        #top_thread(self.auto_thread)
+        print("stop thread")
+        self.event.clear()
+        self.start_BT['state'] = "normal"
+
+
     def get_M_num_data(self):
         self.num_list = self.num_enter_s.get()
         self.M_list = self.M_enter_s.get()
+        if self.num_list is '':
+            self.ea.insert(0, "请输入号码，格式 1-2-3...")
+            return None
 
+        if self.M_list is '':
+            self.e9.insert(0, "请输入M值，格式 1-2-3...")
+            return None
         self.num_list = self.num_list.split('-', 5)
-        self.num_list = list(map(int, self.num_list))
+        try:
+            self.num_list = list(map(int, self.num_list))
+        except ValueError:
+            self.num_list = []
 
         self.M_list = self.M_list.split('-', 20)
-        self.M_list = list(map(int, self.M_list))
-
+        try:
+            self.M_list = list(map(int, self.M_list))
+        except ValueError:
+            self.M_list = []
         # print(self.M_list)
         # print(self.num_list)
     
@@ -244,34 +281,50 @@ class Application(object):
     def TestStart(self):
         img = None
         img = screen_capture(self.X_coordinate.get(), self.Y_coordinate.get(), self.Xx_coordinate.get(), self.Yy_coordinate.get())
-        self.display_img()
-        test_list = self.get_clean_coordinate()
-        # print(test_list)
-        img = processor_discern(img, test_list)
-        self.final_data = pytesseract.image_to_string(img)
-        # print(self.final_data)
+        if self.display_img() == None :
+            self.e6.delete(0, END)
+            self.e6.insert(0, "请正确输入")
+            print("输入坐标错误")
+            pass
+        else:
+            test_list = self.get_clean_coordinate()
+            # print(test_list)
+            test_list_len = len(test_list)
+            if test_list_len != 10:
+                print("识别错误")
+                return False
 
-        # 在 结果 上显示
-        self.e8.delete(0, END)
-        self.e8.insert(0, self.final_data)
+            img = processor_discern(img, test_list)
+            self.final_data = pytesseract.image_to_string(img)
+            # print(self.final_data)
 
-        # 显示 处理后的图片
-        self.display_Endimg()
+            # 在 结果 上显示
+            self.e8.delete(0, END)
+            self.e8.insert(0, self.final_data)
 
-        temp = []
-        temp = list(map(int, re.compile(r'(10|[1-9])').findall(self.final_data)))
-        # temp 就是最后的数组
-        return temp
+            # 显示 处理后的图片
+            self.display_Endimg()
+
+            temp = []
+            temp = list(map(int, re.compile(r'(10|[1-9])').findall(self.final_data)))
+            # temp 就是最后的数组
+            return temp
 
     def start_auto_thread(self):
-        self.auto_thread = threading.Thread(target=self.auto_start, args=())
-        # 住线程推出的时候， 子线程也要退出。
-        self.auto_thread.setDaemon(True)
-        self.auto_thread.start()
+        if not self.auto_thread:
+            self.auto_thread = threading.Thread(target=self.auto_start, args=())
+            # 住线程推出的时候， 子线程也要退出。
+            self.auto_thread.setDaemon(True)
+            self.auto_thread.start()
+        self.event.set()
+        self.start_BT["state"] = DISABLED
 
     def auto_start(self):
+
+        print("auto_start run:")
         while True:
-            d_time = datetime.datetime.strptime(str(datetime.datetime.now().date())+'13:04', '%Y-%m-%d%H:%M')
+            self.event.wait()
+            d_time = datetime.datetime.strptime(str(datetime.datetime.now().date())+'13:10', '%Y-%m-%d%H:%M')
             d_time1 = datetime.datetime.strptime(str(datetime.datetime.now().date())+'4:09', '%Y-%m-%d%H:%M')
             endtime = datetime.datetime.now()
             if endtime > d_time or endtime<d_time1:
@@ -279,7 +332,7 @@ class Application(object):
                 break
             else:
                 print("时间没到 ==：....")
-                time.sleep(60)
+                time.sleep(5)
 
         print("开始：....")
         now_hour = datetime.datetime.now().hour
@@ -302,7 +355,7 @@ class Application(object):
         while True:
             now_hour = datetime.datetime.now().hour
             now_days = datetime.datetime.now().day
-
+            self.event.wait()
             if (now_hour <= 4):
                 starttime = datetime.datetime.now().replace(day=(now_days - 1), hour=13, minute=4)
             else:
@@ -334,7 +387,9 @@ class Application(object):
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
     def The_winning_recognition(self, results):
         print(self.number_of_periods)
-        self.get_M_num_data()
+        ret_val = self.get_M_num_data()
+        if ret_val is None:
+            return
 
         # 11 期  下   1 号  这样的方式   0  下 号
         temp1 = self.number_of_periods % 10
@@ -392,10 +447,18 @@ class Application(object):
 
     def display_img(self):
         self.frm_p = Frame(self.frm)
-        self.im = Image.open(r"E:\xiaotuzi\5.jpg")
-        self.img = ImageTk.PhotoImage(self.im)
-        self.imLabel = Label(self.frm_p, image=self.img).grid(row=0, column=0)
-        self.frm_p.place(x=0, y=0)
+        try:
+            self.im = Image.open(r"E:\xiaotuzi\5.jpg")
+        except OSError:
+            print("读取截图，图片错误")
+            pass
+            return None
+        else:
+            self.img = ImageTk.PhotoImage(self.im)
+            self.imLabel = Label(self.frm_p, image=self.img).grid(row=0, column=0)
+            self.frm_p.place(x=0, y=0)
+            return True
+
 
     def display_Endimg(self):
         self.frm_p1 = Frame(self.frm)
