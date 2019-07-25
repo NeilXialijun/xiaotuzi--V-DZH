@@ -122,10 +122,10 @@ class Application(object):
             .grid(row=0, column=4, padx=1, pady=1)
         self.test_BT.place(x=550, y=25)
 
-        self.start_BT_F = Frame(self.frm)
-        self.start_BT = Button(self.start_BT_F, text='停止铺抓', width=10, command=self.stop_thread)
-        self.start_BT .grid(row=0, column=4, padx=1, pady=1)
-        self.start_BT_F.place(x=550, y=80)
+        self.stop_BT_F = Frame(self.frm)
+        self.stop_BT = Button(self.stop_BT_F, text='暂停铺抓', width=10, command=self.stop_thread)
+        self.stop_BT .grid(row=0, column=4, padx=1, pady=1)
+        self.stop_BT_F.place(x=550, y=80)
 
 
         self.start_BT_F = Frame(self.frm)
@@ -216,14 +216,17 @@ class Application(object):
         self.test_f.place(x=550, y=85)
 
     def stop_thread(self):
-        # _async_raise(self.auto_thread.ident, SystemExit)
-        # ._Thread__stop()
-        # pinger_instance.self.auto_thread.is_set()
-        # self.auto_thread.join()
-        #top_thread(self.auto_thread)
         print("stop thread")
         self.event.clear()
         self.start_BT['state'] = "normal"
+        self.e1["state"] = "normal"
+        self.e2["state"] = "normal"
+        self.e3["state"] = "normal"
+        self.e4["state"] = "normal"
+        self.e6["state"] = "normal"
+        self.e9["state"] = "normal"
+        self.ea["state"] = "normal"
+        self.comboxlist["state"] = "normal"
 
 
     def get_M_num_data(self):
@@ -318,6 +321,14 @@ class Application(object):
             self.auto_thread.start()
         self.event.set()
         self.start_BT["state"] = DISABLED
+        self.e1["state"] = DISABLED
+        self.e2["state"] = DISABLED
+        self.e3["state"] = DISABLED
+        self.e4["state"] = DISABLED
+        self.e6["state"] = DISABLED
+        self.e9["state"] = DISABLED
+        self.ea["state"] = DISABLED
+        self.comboxlist["state"] = DISABLED
 
     def auto_start(self):
 
