@@ -250,8 +250,7 @@ class Application(object):
             self.M_list = list(map(int, self.M_list))
         except ValueError:
             self.M_list = []
-        # print(self.M_list)
-        # print(self.num_list)
+		return True
     
     def test_BT_fun(self):
         print("test begin:")
