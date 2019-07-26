@@ -117,10 +117,10 @@ class Application(object):
         self.e4 = Entry(self.frm_yy, width=5, textvariable=self.Yy_coordinate, justify=LEFT)
         self.e4.grid(row=0, column=7, padx=1, pady=1)
 
-        self.test_BT = Frame(self.frm)
-        Button(self.test_BT, text='开始测试', width=10, command=self.TestStart) \
-            .grid(row=0, column=4, padx=1, pady=1)
-        self.test_BT.place(x=550, y=25)
+        self.test_BT_f = Frame(self.frm)
+        self.test_BT = Button(self.test_BT_f, text='开始测试', width=10, command=self.TestStart)
+        self.test_BT.grid(row=0, column=4, padx=1, pady=1)
+        self.test_BT_f.place(x=550, y=25)
 
         self.stop_BT_F = Frame(self.frm)
         self.stop_BT = Button(self.stop_BT_F, text='暂停铺抓', width=10, command=self.stop_thread)
@@ -181,21 +181,21 @@ class Application(object):
         self.num_enter_f.place(x=10, y=40)
 
         self.num_NO_f  = Frame(self.num_f)
-        Button(self.num_NO_f, text='名号测试', width=10, command=lambda: auto_click.NO_Num_BT(auto_click, self.aotu_click_sheet)) \
-            .grid(row=0, column=4, padx=1, pady=1)
+        self.num_NO_BT = Button(self.num_NO_f, text='名号测试', width=10, command=lambda: auto_click.NO_Num_BT(auto_click, self.aotu_click_sheet))
+        self.num_NO_BT.grid(row=0, column=4, padx=1, pady=1)
         # Button(self.num_NO_f, text='名号测试', width=10, command='') \
         #     .grid(row=0, column=4, sticky=E, padx=1, pady=1)
         self.num_NO_f.place(x=50, y=85)
 
         self.M_f = Frame(self.num_f)
-        Button(self.M_f, text='M 测试', width=10, command=lambda: auto_click.M_BT(auto_click, self.aotu_click_sheet)) \
-            .grid(row=0, column=4, padx=1, pady=1)
+        self.M_BT = Button(self.M_f, text='M 测试', width=10, command=lambda: auto_click.M_BT(auto_click, self.aotu_click_sheet))
+        self.M_BT.grid(row=0, column=4, padx=1, pady=1)
         self.M_f.place(x=150, y=85)
 
         self.M_list = self.M_enter_s.get()
         self.reality_f = Frame(self.num_f)
-        Button(self.reality_f, text='真实模拟测试', width=10, command=lambda: auto_click.reality_BT(auto_click, self.aotu_click_sheet)) \
-            .grid(row=0, column=4, padx=1, pady=1)
+        self.reality_BT = Button(self.reality_f, text='真实模拟测试', width=10, command=lambda: auto_click.reality_BT(auto_click, self.aotu_click_sheet))
+        self.reality_BT.grid(row=0, column=4, padx=1, pady=1)
         self.reality_f.place(x=250, y=85)
 
         self.periods_select = Frame(self.num_f)
@@ -211,8 +211,8 @@ class Application(object):
         # temp2 = [5,2,6,3,10,4,1,9,8,7]
         # self.number_of_periods = 140
         self.test_f = Frame(self.num_f)
-        Button(self.test_f, text='暂时测试', width=10, command=lambda: self.test_BT_fun()) \
-            .grid(row=0, column=4, padx=1, pady=1)
+        self.test_BT = Button(self.test_f, text='暂时测试', width=10, command=lambda: self.test_BT_fun())
+        self.test_BT.grid(row=0, column=4, padx=1, pady=1)
         self.test_f.place(x=550, y=85)
 
     def stop_thread(self):
@@ -227,7 +227,10 @@ class Application(object):
         self.e9["state"] = "normal"
         self.ea["state"] = "normal"
         self.comboxlist["state"] = "normal"
-
+        self.num_NO_BT["state"] = "normal"
+        self.M_BT["state"] = "normal"
+        self.reality_BT["state"] = "normal"
+        self.test_BT["state"] = "normal"
 
     def get_M_num_data(self):
         self.num_list = self.num_enter_s.get()
@@ -250,7 +253,7 @@ class Application(object):
             self.M_list = list(map(int, self.M_list))
         except ValueError:
             self.M_list = []
-		return True
+        return True
     
     def test_BT_fun(self):
         print("test begin:")
@@ -328,6 +331,10 @@ class Application(object):
         self.e9["state"] = DISABLED
         self.ea["state"] = DISABLED
         self.comboxlist["state"] = DISABLED
+        self.num_NO_BT["state"] = DISABLED
+        self.M_BT["state"] = DISABLED
+        self.reality_BT["state"] = DISABLED
+        self.test_BT["state"] = DISABLED
 
     def auto_start(self):
 
