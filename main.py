@@ -9,8 +9,7 @@ from tkinter import *
 from tkinter import *
 from tkinter.messagebox import *
 
-		
 root = Tk()
-root.title('V1 小兔子乖乖')
+root.title('V1.0 金蟾望月-V-DZH')
 LoginPage(root)
 root.mainloop()

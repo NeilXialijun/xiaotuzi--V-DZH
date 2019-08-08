@@ -48,13 +48,14 @@ def key_input(str=''):
 class auto_click():
     def excel_init(self):
         #文件打开
-        ExcelFile=xlrd.open_workbook(r'E:\xiaotuzi\auto_click.xls')
+        try :
+            ExcelFile=xlrd.open_workbook(r'E:\xiaotuzi\auto_click.xls')
+        except:
+            print("no more aotu_click date1")
         print(ExcelFile.sheet_names())
         # 点击 坐标打开
-        self.aotu_click = ExcelFile.sheet_by_name(r'E:\xiaotuzi\auto_click.xls')
         try :
             self.aotu_click1 = ExcelFile.sheet_by_name(r'E:\xiaotuzi\auto_click.xls')
-            
         except :
             print("no more aotu_click date1")
         
@@ -63,7 +64,7 @@ class auto_click():
             
         except :
             print("no more aotu_click date2")
-           
+
         # 数据 记录
         self.data_logging = ExcelFile.sheet_by_name('data_logging')
 
@@ -113,7 +114,6 @@ class auto_click():
                 M_Enter = 10  # 0坐标 的数据在 最后一个
             # 获取名次坐标
             ranking_data = aotu_click.cell_value(3, M_Enter)
-            print(ranking_data)
 
             # 转换成坐标数据
             list1 = ranking_data.split(' ', 1)

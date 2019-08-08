@@ -241,6 +241,7 @@ class Application(object):
 
         if self.M_list is '':
             self.e9.insert(0, "请输入M值，格式 1-2-3...")
+            print("获取M 值错误")
             return None
         self.num_list = self.num_list.split('-', 5)
         try:
@@ -313,6 +314,9 @@ class Application(object):
             temp = []
             temp = list(map(int, re.compile(r'(10|[1-9])').findall(self.final_data)))
             # temp 就是最后的数组
+            if len(temp) < 10:
+                print("识别数据小于10")
+                return False
             return temp
 
     def start_auto_thread(self):
@@ -387,7 +391,10 @@ class Application(object):
                 continue
 
             self.The_lottery_results = self.TestStart()
-            
+            if self.The_lottery_results == False:
+                time.sleep(5)
+                continue
+
             # 不等于 表 已经更新， 可以走一下流程
             if self.The_lottery_results_old != self.The_lottery_results:
             
@@ -406,6 +413,7 @@ class Application(object):
         print(self.number_of_periods)
         ret_val = self.get_M_num_data()
         if ret_val is None:
+            print("get_M_num_data error!!")
             return
 
         # 11 期  下   1 号  这样的方式   0  下 号
@@ -434,7 +442,7 @@ class Application(object):
                 self.bet_flag = 0
             self.results_not_count = 0
         else:
-            self.results_not_count = self.results_not_count + 1
+            
             if self.results_not_count >= int(self.comboxlist.get()) or self.bet_flag == 1:
                 self.bet_flag = 1
                 temp1 = (self.number_of_periods % 10) + 1   # 因为是压下 一期的
@@ -447,6 +455,8 @@ class Application(object):
                 print("投入M %d  。。。" %self.M_list[self.bet_count])
                 self.bet_count = self.bet_count + 1
                 print("bet  on    ....！！！！！")
+
+            self.results_not_count = self.results_not_count + 1
 
         if self.bet_count > len(self.M_list):
             self.bet_count = 0
@@ -479,7 +489,13 @@ class Application(object):
 
     def display_Endimg(self):
         self.frm_p1 = Frame(self.frm)
-        self.im1 = Image.open(r"E:\xiaotuzi\66.jpg")
+        try:
+            self.im1 = Image.open(r"E:\xiaotuzi\66.jpg")
+        except :
+            print("读取图片错误")
+            pass
+            return None
+
         self.img1 = ImageTk.PhotoImage(self.im1)
         self.imLabel = Label(self.frm_p1, image=self.img1).grid(row=0, column=0)
         self.frm_p1.place(x=0, y=100)
