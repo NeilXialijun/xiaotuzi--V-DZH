@@ -258,8 +258,8 @@ class Application(object):
     
     def test_BT_fun(self):
         print("test begin:")
-        self.periods = 13
-        for number in range(14, 88):
+        self.periods = 1
+        for number in range(2, 177):
 
             number_value1 = self.test_sheet.cell_value(number, 0)
             number_value2 = self.test_sheet.cell_value(number, 1)
@@ -424,14 +424,23 @@ class Application(object):
 
         temp1 = temp1 - 1
         print("下4  名次  结果  名次上的数据  M")
-        print(temp1)
+        print(temp1+1)
         print(results)
         print(results[temp1])
         print(self.num_list)
         
-        # 保存数据上色标志
+        # 保存数据上色标志  1-2-4-6-9-15-21-31-45-65-97-139-210-300-450
         marked = 0
+        print(len(self.M_list))
+        print(int(self.comboxlist.get()))
+        if self.bet_count == len(self.M_list):
+            self.bet_count = 0
+            self.bet_flag = 0
 
+        temp2 = len(self.M_list) + int(self.comboxlist.get())
+        if self.results_not_count == temp2:
+            self.results_not_count = 0
+			
          # ZJ 判断
         if results[temp1] in self.num_list:
             print("Z J....！！！！！")
@@ -457,14 +466,6 @@ class Application(object):
                 print("bet  on    ....！！！！！")
 
             self.results_not_count = self.results_not_count + 1
-
-        if self.bet_count > len(self.M_list):
-            self.bet_count = 0
-            self.bet_flag = 0
-
-        temp1 = len(self.M_list) + int(self.comboxlist.get())
-        if self.results_not_count == temp1:
-            self.results_not_count = 0
 
         # 保存原始数据，
         self.save_excel(marked)
