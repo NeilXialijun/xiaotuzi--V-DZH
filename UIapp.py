@@ -202,9 +202,9 @@ class Application(object):
         self.num_enter_l = Label(self.periods_select, text='周期间隔 :').grid(row=0, column=0)
 
         self.comvalue = StringVar()  # 窗体自带的文本，新建一个值
-        self.comboxlist = ttk.Combobox(self.periods_select, width=3, textvariable=self.comvalue)  # 初始化
-        self.comboxlist["values"] = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        self.comboxlist.current(6)  # 选择第一个
+        self.comboxlist = ttk.Combobox(self.periods_select, width=6, textvariable=self.comvalue)  # 初始化
+        self.comboxlist["values"] = ('每一期',0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        self.comboxlist.current(4)  # 选择第一个
         self.comboxlist.grid(row=0, column=6)
         self.periods_select.place(x=450, y=8)
 
@@ -432,38 +432,68 @@ class Application(object):
         # 保存数据上色标志  1-2-4-6-9-15-21-31-45-65-97-139-210-300-450
         marked = 0
         print(len(self.M_list))
-        print(int(self.comboxlist.get()))
+        print(self.comboxlist.get())
         if self.bet_count == len(self.M_list):
             self.bet_count = 0
             self.bet_flag = 0
-
-        temp2 = len(self.M_list) + int(self.comboxlist.get())
-        if self.results_not_count == temp2:
             self.results_not_count = 0
-			
+
+        #temp2 = len(self.M_list) + int(self.comboxlist.get())
+        #if self.results_not_count == temp2:
+        #    self.results_not_count = 0
+
          # ZJ 判断
         if results[temp1] in self.num_list:
             print("Z J....！！！！！")
             marked = 1
-            
             if self.bet_flag == 1:
                 self.bet_count = 0
                 self.bet_flag = 0
             self.results_not_count = 0
-        else:
-            
-            if self.results_not_count >= int(self.comboxlist.get()) or self.bet_flag == 1:
+
+            if self.comboxlist.get() == '每一期':
+
                 self.bet_flag = 1
                 temp1 = (self.number_of_periods % 10) + 1   # 因为是压下 一期的
-                
+
                 auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count], self.aotu_click_sheet)
                 self.worksheet.write((self.periods+1), 3, ("%s")%(self.M_list[self.bet_count]), self.style)  # 期数
 
                 # self.test_sheet1.write(self.periods, 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 测试BT专用
 
-                print("投入M %d  。。。" %self.M_list[self.bet_count])
+                print("第一，，投入M %d  。。。" %self.M_list[self.bet_count])
                 self.bet_count = self.bet_count + 1
-                print("bet  on    ....！！！！！")
+                print("bet  on第一，，    ....！！！！！")
+
+
+        else:
+            if self.comboxlist.get() == '每一期':
+                self.bet_flag = 1
+                temp1 = (self.number_of_periods % 10) + 1  # 因为是压下 一期的
+
+                auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count],
+                self.aotu_click_sheet)
+                self.worksheet.write((self.periods + 1), 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 期数
+
+                # self.test_sheet1.write(self.periods, 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 测试BT专用
+
+                print("第二，，投入M %d  。。。" % self.M_list[self.bet_count])
+                self.bet_count = self.bet_count + 1
+                print("第二，，bet  on    ....！！！！！")
+
+            elif self.results_not_count >= int(self.comboxlist.get()) or self.bet_flag == 1:
+                self.bet_flag = 1
+                temp1 = (self.number_of_periods % 10) + 1  # 因为是压下 一期的
+
+                auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count],
+                                       self.aotu_click_sheet)
+                self.worksheet.write((self.periods + 1), 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 期数
+
+                # self.test_sheet1.write(self.periods, 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 测试BT专用
+
+                print("第三投入M %d  。。。" % self.M_list[self.bet_count])
+                self.bet_count = self.bet_count + 1
+                print("第三bet  on    ....！！！！！")
 
             self.results_not_count = self.results_not_count + 1
 
