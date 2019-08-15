@@ -446,6 +446,13 @@ class Application(object):
         if results[temp1] in self.num_list:
             print("Z J....！！！！！")
             marked = 1
+            now_hour = datetime.datetime.now().hour
+            now_minute = datetime.datetime.now().minute
+
+            if now_hour == 3 and now_minute > 14:
+                print("最后几期  不下了， 睡觉了。。。。请关闭程序。。")
+                self.stop_thread()
+
             if self.bet_flag == 1:
                 self.bet_count = 0
                 self.bet_flag = 0
