@@ -463,9 +463,12 @@ class Application(object):
                 self.bet_flag = 1
                 temp1 = (self.number_of_periods % 10) + 1   # 因为是压下 一期的
 
-                auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count], self.aotu_click_sheet)
-                self.worksheet.write((self.periods+1), 3, ("%s")%(self.M_list[self.bet_count]), self.style)  # 期数
-
+                if self.M_list[self.bet_count] != 0:
+                    auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count], self.aotu_click_sheet)
+                    self.worksheet.write((self.periods+1), 3, ("%s")%(self.M_list[self.bet_count]), self.style)  # 期数
+                else:
+                    print("这期不用压人！！！！1")
+                
                 # self.test_sheet1.write(self.periods, 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 测试BT专用
 
                 print("第一，，投入M %d  。。。" %self.M_list[self.bet_count])
@@ -477,11 +480,13 @@ class Application(object):
             if self.comboxlist.get() == '每一期':
                 self.bet_flag = 1
                 temp1 = (self.number_of_periods % 10) + 1  # 因为是压下 一期的
-
-                auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count],
-                self.aotu_click_sheet)
-                self.worksheet.write((self.periods + 1), 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 期数
-
+                
+                if self.M_list[self.bet_count] != 0:
+                    auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count],self.aotu_click_sheet)
+                    self.worksheet.write((self.periods + 1), 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 期数
+                else:
+                    print("这期不用压人！！！！2")
+                    
                 # self.test_sheet1.write(self.periods, 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 测试BT专用
 
                 print("第二，，投入M %d  。。。" % self.M_list[self.bet_count])
@@ -492,10 +497,12 @@ class Application(object):
                 self.bet_flag = 1
                 temp1 = (self.number_of_periods % 10) + 1  # 因为是压下 一期的
 
-                auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count],
-                                       self.aotu_click_sheet)
-                self.worksheet.write((self.periods + 1), 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 期数
-
+                if self.M_list[self.bet_count] != 0:
+                    auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count],self.aotu_click_sheet)
+                    self.worksheet.write((self.periods + 1), 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 期数
+                
+                else:
+                    print("这期不用压人！！！！3")
                 # self.test_sheet1.write(self.periods, 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 测试BT专用
 
                 print("第三投入M %d  。。。" % self.M_list[self.bet_count])
