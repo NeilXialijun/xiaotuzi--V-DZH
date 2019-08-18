@@ -62,7 +62,7 @@ def processor_discern(img, test_list):
     n = 0
     # 填充黑 条
     while n < 9:
-        cv2.line(img_thre, (test_list[n], 0), (test_list[n], 50), white, 3)
+        cv2.line(img_thre, (test_list[n], 0), (test_list[n], 50), white, 4)
         n += 1
 
     #cv2.imshow("image", img_thre)

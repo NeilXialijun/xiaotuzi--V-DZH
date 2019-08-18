@@ -23,16 +23,16 @@ class Application(object):
 
     def __init__(self, master=None):
         self.root = master    #    定义内部变量root
-        self.root.geometry('660x410')
+        self.root.geometry('655x418')
         self.root.resizable(0,0)
 
         # # 创建一个容器,
         self.frm = ttk.LabelFrame(self.root, text="图片处理")     # 创建一个容器，其父容器为win
-        self.frm.place(x=0, y=0, anchor="nw", width=650, height=250)
+        self.frm.place(x=0, y=0, anchor="nw", width=650, height=230)
         self.frm_p = Frame(self.frm)
 
         self.num_f = ttk.LabelFrame(self.root, text="数据处理")     # 创建一个容器，其父容器为win
-        self.num_f.place(x=0, y=255, anchor="nw", width=650, height=150)
+        self.num_f.place(x=0, y=235, anchor="nw", width=650, height=180)
         self.frm_num = Frame(self.num_f)
 
         self.clean_coordinate_str = ""
@@ -40,6 +40,15 @@ class Application(object):
         self.results_not_count = 0
         self.bet_count = 0
         self.bet_flag = 0
+
+        self.bet_count2 = 0
+        self.bet_flag2 = 0
+        self.results_not_count2 = 0
+
+        self.bet_count3 = 0
+        self.bet_flag3 = 0
+        self.results_not_count3 = 0
+
         self.The_lottery_results_old = []
         self.The_lottery_results = []
         self.periods = 0
@@ -125,13 +134,13 @@ class Application(object):
         self.stop_BT_F = Frame(self.frm)
         self.stop_BT = Button(self.stop_BT_F, text='暂停铺抓', width=10, command=self.stop_thread)
         self.stop_BT .grid(row=0, column=4, padx=1, pady=1)
-        self.stop_BT_F.place(x=550, y=80)
+        self.stop_BT_F.place(x=550, y=70)
 
 
         self.start_BT_F = Frame(self.frm)
         self.start_BT = Button(self.start_BT_F, text='开始铺抓', width=10, command=self.start_auto_thread)
         self.start_BT .grid(row=0, column=4, padx=1, pady=1)
-        self.start_BT_F.place(x=550, y=150)
+        self.start_BT_F.place(x=550, y=120)
 
 
 # # -------------清理条 输入 ---------------------------------------------------------
@@ -151,7 +160,7 @@ class Application(object):
         self.Temp = ("%s.%s") % get_mouse_point()
         self.e7 = Entry(self.mouse_f, width=10, textvariable=self.Temp)
         self.e7.grid(row=0, column=12, padx=1, pady=1)
-        self.mouse_f.place(x=520, y=200)
+        self.mouse_f.place(x=520, y=170)
 
 
 # # -------------识别结果------------------------------------------------------------------
@@ -173,30 +182,48 @@ class Application(object):
         self.M_enter_f.place(x=10, y=10)
 
         self.num_enter_f = Frame(self.num_f)
-        self.num_enter_l = Label(self.num_enter_f, text='号码输入:', justify=LEFT).grid(row=0, column=0)
+        self.num_enter_l = Label(self.num_enter_f, text='号码输入1:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter_s = StringVar()
         self.ea = Entry(self.num_enter_f, width=50, textvariable=self.num_enter_s)
         self.ea.grid(row=0, column=12, padx=1, pady=1)
         self.num_enter_f.place(x=10, y=40)
+        
+        self.num_enter2_f = Frame(self.num_f)
+        self.num_enter2_l = Label(self.num_enter2_f, text='号码输入2:', justify=LEFT).grid(row=0, column=0)
+
+        self.num_enter2_s = StringVar()
+        self.ea2 = Entry(self.num_enter2_f, width=50, textvariable=self.num_enter2_s)
+        self.ea2.grid(row=0, column=12, padx=1, pady=1)
+        self.num_enter2_f.place(x=10, y=65)
+
+        self.num_enter3_f = Frame(self.num_f)
+        self.num_enter3_l = Label(self.num_enter3_f, text='号码输入3:', justify=LEFT).grid(row=0, column=0)
+
+        self.num_enter3_s = StringVar()
+        self.ea3 = Entry(self.num_enter3_f, width=50, textvariable=self.num_enter3_s)
+        self.ea3.grid(row=0, column=12, padx=1, pady=1)
+        self.num_enter3_f.place(x=10, y=90)
+        
+        
 
         self.num_NO_f  = Frame(self.num_f)
         self.num_NO_BT = Button(self.num_NO_f, text='名号测试', width=10, command=lambda: auto_click.NO_Num_BT(auto_click, self.aotu_click_sheet))
         self.num_NO_BT.grid(row=0, column=4, padx=1, pady=1)
         # Button(self.num_NO_f, text='名号测试', width=10, command='') \
         #     .grid(row=0, column=4, sticky=E, padx=1, pady=1)
-        self.num_NO_f.place(x=50, y=85)
+        self.num_NO_f.place(x=50, y=120)
 
         self.M_f = Frame(self.num_f)
         self.M_BT = Button(self.M_f, text='M 测试', width=10, command=lambda: auto_click.M_BT(auto_click, self.aotu_click_sheet))
         self.M_BT.grid(row=0, column=4, padx=1, pady=1)
-        self.M_f.place(x=150, y=85)
+        self.M_f.place(x=150, y=120)
 
         self.M_list = self.M_enter_s.get()
         self.reality_f = Frame(self.num_f)
         self.reality_BT = Button(self.reality_f, text='真实模拟测试', width=10, command=lambda: auto_click.reality_BT(auto_click, self.aotu_click_sheet))
         self.reality_BT.grid(row=0, column=4, padx=1, pady=1)
-        self.reality_f.place(x=250, y=85)
+        self.reality_f.place(x=250, y=120)
 
         self.periods_select = Frame(self.num_f)
         self.num_enter_l = Label(self.periods_select, text='周期间隔 :').grid(row=0, column=0)
@@ -226,6 +253,8 @@ class Application(object):
         self.e6["state"] = "normal"
         self.e9["state"] = "normal"
         self.ea["state"] = "normal"
+        self.ea2["state"] = "normal"
+        self.ea3["state"] = "normal"
         self.comboxlist["state"] = "normal"
         self.num_NO_BT["state"] = "normal"
         self.M_BT["state"] = "normal"
@@ -234,10 +263,20 @@ class Application(object):
 
     def get_M_num_data(self):
         self.num_list = self.num_enter_s.get()
+        self.num_list2 = self.num_enter2_s.get()
+        self.num_list3 = self.num_enter3_s.get()
         self.M_list = self.M_enter_s.get()
         if self.num_list is '':
             self.ea.insert(0, "请输入号码，格式 1-2-3...")
             return None
+
+        if self.num_list2 is not'':
+            self.num_list2 = self.num_list2.split('-', 5)
+            self.num_list2 = list(map(int, self.num_list2))
+
+        if self.num_list3 is not'':
+            self.num_list3 = self.num_list3.split('-', 5)
+            self.num_list3 = list(map(int, self.num_list3))
 
         if self.M_list is '':
             self.e9.insert(0, "请输入M值，格式 1-2-3...")
@@ -334,6 +373,8 @@ class Application(object):
         self.e6["state"] = DISABLED
         self.e9["state"] = DISABLED
         self.ea["state"] = DISABLED
+        self.ea2["state"] = DISABLED
+        self.ea3["state"] = DISABLED
         self.comboxlist["state"] = DISABLED
         self.num_NO_BT["state"] = DISABLED
         self.M_BT["state"] = DISABLED
@@ -437,26 +478,84 @@ class Application(object):
             self.bet_count = 0
             self.bet_flag = 0
             self.results_not_count = 0
+            
+            self.bet_count2 = 0
+            self.bet_flag2 = 0
+            self.results_not_count2 = 0
+            
+            self.bet_count3 = 0
+            self.bet_flag3 = 0
+            self.results_not_count3 = 0
+            
+        # ZJ 2 判断
+        if results[temp1] in self.num_list2:
+            print("Z J 2....！！！！！")
+            if self.bet_flag2 == 1 :
+                self.bet_count2 = 0
+                self.bet_flag2 = 0
+                self.results_not_count2 = 0 
+                
+        elif self.results_not_count2 >= int(self.comboxlist.get()) or self.bet_flag2 == 1:
+            self.bet_flag2 = 1
+            temp1 = (self.number_of_periods % 10) + 1  # 因为是压下 一期的
 
-        #temp2 = len(self.M_list) + int(self.comboxlist.get())
-        #if self.results_not_count == temp2:
-        #    self.results_not_count = 0
+            if self.M_list[self.bet_count2] != 0:
+                auto_click.reality_bet(auto_click, temp1, self.num_list2, self.M_list[self.bet_count2],self.aotu_click_sheet)
+                self.worksheet.write((self.periods + 1), 4, ("%s") % (self.M_list[self.bet_count2]), self.style)  # 期数
 
-         # ZJ 判断
+
+            else:
+                print("号码2 期投 这期不用压人！！！！3")
+            # self.test_sheet1.write(self.periods, 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 测试BT专用
+
+            print("第三投  号码2 期投 入M %d  。。。" % self.M_list[self.bet_count2])
+            self.bet_count2 = self.bet_count2 + 1
+            print("第三bet 号码2 期投 on    ....！！！！！")
+        
+            self.results_not_count2 = self.results_not_count2 + 1
+        
+        # ZJ 3 判断        
+        if results[temp1] in self.num_list3:
+            print("Z J 3....！！！！！")
+            if self.bet_flag3 == 1 :
+                self.bet_count3 = 0
+                self.bet_flag3 = 0            
+                self.results_not_count3 = 0
+                
+        elif self.results_not_count3 >= int(self.comboxlist.get()) or self.bet_flag3 == 1:
+        
+            self.bet_flag3 = 1
+            temp1 = (self.number_of_periods % 10) + 1  # 因为是压下 一期的
+
+            if self.M_list[self.bet_count3] != 0:
+                auto_click.reality_bet(auto_click, temp1, self.num_list3, self.M_list[self.bet_count3],self.aotu_click_sheet)
+                self.worksheet.write((self.periods + 1), 5, ("%s") % (self.M_list[self.bet_count3]), self.style)  # 期数
+
+            else:
+                print("号码3 这期不用压人！！！！3")
+            # self.test_sheet1.write(self.periods, 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 测试BT专用
+
+            print("号码3  第三投入M %d  。。。" % self.M_list[self.bet_count3])
+            self.bet_count3 = self.bet_count3 + 1
+            print("号码3  第三bet  on    ....！！！！！")
+            
+            self.results_not_count3 = self.results_not_count3 + 1
+        
+        # ZJ 0 判断
         if results[temp1] in self.num_list:
             print("Z J....！！！！！")
             marked = 1
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute
 
-            if now_hour == 3 and now_minute > 14:
-                print("最后几期  不下了， 睡觉了。。。。请关闭程序。。")
-                self.stop_thread()
+            #if now_hour == 3 and now_minute > 14:
+            #   print("最后几期  不下了， 睡觉了。。。。请关闭程序。。")
+            #    self.stop_thread()
 
             if self.bet_flag == 1:
                 self.bet_count = 0
                 self.bet_flag = 0
-            self.results_not_count = 0
+                self.results_not_count = 0
 
             if self.comboxlist.get() == '每一期':
 
@@ -511,10 +610,11 @@ class Application(object):
 
             self.results_not_count = self.results_not_count + 1
 
-        # 保存原始数据，
+        # 保存原始数据
         self.save_excel(marked)
-
-        print("now 没z 计数 %d   ====================="%self.results_not_count)
+        print("now 没z 计数 %d   ==============="%self.results_not_count)
+        print("now2 没z 计数 %d  =============="%self.results_not_count2)
+        print("now3 没z 计数 %d  =============="%self.results_not_count3)
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     def display_img(self):
