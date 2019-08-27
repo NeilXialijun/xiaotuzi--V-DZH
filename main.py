@@ -10,6 +10,6 @@ from tkinter import *
 from tkinter.messagebox import *
 
 root = Tk()
-root.title('V1.0 金蟾望月-V-DZH')
+root.title('V1.3 金蟾望月-V-DZH')
 LoginPage(root)
 root.mainloop()

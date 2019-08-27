@@ -118,7 +118,7 @@ class auto_click():
             # 转换成坐标数据
             list1 = ranking_data.split(' ', 1)
             list1 = list(map(int, list1))
-            print(list1)
+            #print(list1)
             mouse_click(list1[0], list1[1])
 
         # 选 号 1~ 10
@@ -132,7 +132,7 @@ class auto_click():
             # 转换成坐标数据
             list1 = ranking_data.split(' ', 1)
             list1 = list(map(int, list1))
-            print(list1)
+            #print(list1)
             mouse_click(list1[0], list1[1])
             time.sleep(0.8)
 
@@ -147,7 +147,7 @@ class auto_click():
             # 转换成坐标数据
             list1 = ranking_data.split(' ', 1)
             list1 = list(map(int, list1))
-            print(list1)
+            #print(list1)
             mouse_click(list1[0], list1[1])
 
         # 名次 选中  冠  ~   10
@@ -162,8 +162,7 @@ class auto_click():
             # 转换成坐标数据
             list1 = ranking_data.split(' ', 1)
             list1 = list(map(int, list1))
-            print("报错地方 .....")
-            print(list1)
+            #print(list1)
             mouse_click(list1[0], list1[1])
 
         # M 输入 选中
@@ -174,7 +173,7 @@ class auto_click():
         # 转换成坐标数据
         list1 = ranking_data.split(' ', 1)
         list1 = list(map(int, list1))
-        print(list1)
+        #print(list1)
         mouse_click(list1[0], list1[1])
 
 
@@ -184,7 +183,7 @@ class auto_click():
         # 转换成坐标数据
         list1 = ranking_data.split(' ', 1)
         list1 = list(map(int, list1))
-        print(list1)
+        #print(list1)
         mouse_click(list1[0], list1[1])
 
 
@@ -194,7 +193,7 @@ class auto_click():
         # 转换成坐标数据
         list1 = ranking_data.split(' ', 1)
         list1 = list(map(int, list1))
-        print(list1)
+        #print(list1)
         mouse_click(list1[0], list1[1])
 
 
@@ -204,7 +203,7 @@ class auto_click():
         # 转换成坐标数据
         list1 = ranking_data.split(' ', 1)
         list1 = list(map(int, list1))
-        print(list1)
+        #print(list1)
         mouse_click(list1[0], list1[1])
 
 
