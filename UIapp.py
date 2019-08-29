@@ -52,6 +52,12 @@ class Application(object):
         self.bet_count4 = 0
         self.bet_flag4 = 0
         self.results_not_count4 = 0   
+        
+        
+        self.not_neet_bet1 = 0
+        self.not_neet_bet2 = 0
+        self.not_neet_bet3 = 0
+        self.not_neet_bet4 = 0        
 
         self.The_lottery_results_old = []
         self.The_lottery_results = []
@@ -502,15 +508,18 @@ class Application(object):
             self.bet_count = 0
             self.bet_flag = 0
             self.results_not_count = 0
-
+        
+        if self.bet_count2 == len(self.M_list):
             self.bet_count2 = 0
             self.bet_flag2 = 0
             self.results_not_count2 = 0
-
+            
+        if self.bet_count3 == len(self.M_list):
             self.bet_count3 = 0
             self.bet_flag3 = 0
             self.results_not_count3 = 0
-
+        
+        if self.bet_count4 == len(self.M_list):
             self.bet_count4 = 0
             self.bet_flag4 = 0
             self.results_not_count4 = 0
@@ -524,7 +533,8 @@ class Application(object):
 
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了1， 睡觉了。。。。请关闭程序。。")
-               self.stop_thread()
+               self.not_neet_bet1 = 1
+               #self.stop_thread()
 
             self.bet_count = 0
             self.results_not_count = 0
@@ -541,7 +551,8 @@ class Application(object):
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了2， 睡觉了。。。。请关闭程序。。")
-               self.stop_thread()
+               self.not_neet_bet2 = 1
+               #self.stop_thread()
                
             self.bet_count2 = 0
             self.results_not_count2 = 0    
@@ -557,7 +568,8 @@ class Application(object):
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了3， 睡觉了。。。。请关闭程序。。")
-               self.stop_thread()
+               self.not_neet_bet3 = 0
+               #self.stop_thread()
                
             self.bet_count3 = 0     
             self.results_not_count3 = 0
@@ -573,7 +585,8 @@ class Application(object):
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
                print("最后几期  4  不下了， 睡觉了。。。。请关闭程序。。")
-               self.stop_thread()
+               self.not_neet_bet4 = 0
+               #self.stop_thread()
                
             self.bet_count4 = 0     
             self.results_not_count4 = 0           
@@ -582,25 +595,25 @@ class Application(object):
             
         temp1 = (self.number_of_periods % 10) + 1   # 因为是压下 一期的
 
-        if self.M_list[self.bet_count] != 0:
+        if self.M_list[self.bet_count] != 0 and self.not_neet_bet1 != 1:
             auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count], self.aotu_click_sheet)
             self.worksheet.write((self.periods+1), 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 期数
         else:
             print("这期不用压！！！！1")
         
-        if self.M_list[self.bet_count2] != 0:
+        if self.M_list[self.bet_count2] != 0 and self.not_neet_bet2 != 1:
             auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count2], self.aotu_click_sheet)
             self.worksheet.write((self.periods+1), 4, ("%s") % (self.M_list[self.bet_count2]), self.style)  # 期数
         else:
             print("这期不用压2！！！！1")
             
-        if self.M_list[self.bet_count3] != 0:
+        if self.M_list[self.bet_count3] != 0 and self.not_neet_bet3 != 1:
             auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count3], self.aotu_click_sheet)
             self.worksheet.write((self.periods+1), 5, ("%s") % (self.M_list[self.bet_count3]), self.style)  # 期数
         else:
             print("这期不用压3！！！！1")
 
-        if self.M_list[self.bet_count4] != 0:
+        if self.M_list[self.bet_count4] != 0 and self.not_neet_bet4 != 1:
             auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count4], self.aotu_click_sheet)
             self.worksheet.write((self.periods+1), 6, ("%s") % (self.M_list[self.bet_count4]), self.style)  # 期数
         else:
