@@ -601,20 +601,21 @@ class Application(object):
         else:
             print("这期不用压！！！！1")
         
+
         if self.M_list[self.bet_count2] != 0 and self.not_neet_bet2 != 1:
-            auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count2], self.aotu_click_sheet)
+            auto_click.reality_bet(auto_click, temp1, self.num_list2, self.M_list[self.bet_count2], self.aotu_click_sheet)
             self.worksheet.write((self.periods+1), 4, ("%s") % (self.M_list[self.bet_count2]), self.style)  # 期数
         else:
             print("这期不用压2！！！！1")
-            
+
         if self.M_list[self.bet_count3] != 0 and self.not_neet_bet3 != 1:
-            auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count3], self.aotu_click_sheet)
+            auto_click.reality_bet(auto_click, temp1, self.num_list3, self.M_list[self.bet_count3], self.aotu_click_sheet)
             self.worksheet.write((self.periods+1), 5, ("%s") % (self.M_list[self.bet_count3]), self.style)  # 期数
         else:
             print("这期不用压3！！！！1")
 
         if self.M_list[self.bet_count4] != 0 and self.not_neet_bet4 != 1:
-            auto_click.reality_bet(auto_click, temp1, self.num_list, self.M_list[self.bet_count4], self.aotu_click_sheet)
+            auto_click.reality_bet(auto_click, temp1, self.num_list4, self.M_list[self.bet_count4], self.aotu_click_sheet)
             self.worksheet.write((self.periods+1), 6, ("%s") % (self.M_list[self.bet_count4]), self.style)  # 期数
         else:
             print("这期不用压4！！！！1")
