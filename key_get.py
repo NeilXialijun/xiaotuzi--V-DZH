@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import *
 from tkinter.messagebox import *
+import datetime
 
 class LoginPage(object): 
 	def __init__(self, master=None): 
@@ -23,10 +24,14 @@ class LoginPage(object):
 
 	def loginCheck(self): 
 		name = self.username.get() 
+        
+		nowTime = datetime.datetime.now().strftime('%Y%m%d')
+		nowTime = int(nowTime)
+        
 		my_mac = int(name)
 		my_mac = my_mac / 9527
 		my_mac = int(my_mac)
-		my_mac = my_mac * 2828
+		my_mac = my_mac * nowTime
 		my_mac = my_mac - 123456789
 		my_mac = my_mac + 987654321
 		self.password.set(my_mac)

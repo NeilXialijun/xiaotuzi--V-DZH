@@ -295,5 +295,5 @@ class auto_click():
         self.Down_enterM(self, aotu_click)
         time.sleep(1)
         self.Down_confirmM(self, aotu_click)
-        time.sleep(5)
+        time.sleep(15)
         self.clean_all(self, aotu_click)

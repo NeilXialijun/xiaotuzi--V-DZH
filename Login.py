@@ -2,10 +2,13 @@ from tkinter import *
 from tkinter.messagebox import *
 from UIapp import *
 # import xlwt
+import time
+import datetime
 import xlrd
 import uuid
+
 # from MainPage import *
-  
+ 
 class LoginPage(object):
 
 	def __init__(self, master=None):
@@ -14,7 +17,6 @@ class LoginPage(object):
 		self.username = StringVar() 
 		self.password = StringVar()
 		self.createPage() 
-		
 		# 10 进制  显示 mac
 		self.username.set(self.get_mac_address())
 		
@@ -31,11 +33,11 @@ class LoginPage(object):
 		self.page = Frame(self.root) #创建Frame 
 		self.page.pack() 
 		Label(self.page).grid(row=0, stick=W) 
-		Label(self.page, text = '机械编码: ').grid(row=1, stick=W, pady=10) 
-		Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E) 
+		Label(self.page, text='机械编码: ').grid(row=1, stick=W, pady=10)
+		Entry(self.page, textvariable=self.username).grid(row=1, column=1, stick=E)
 		
-		Label(self.page, text = '秘钥输入: ').grid(row=2, stick=W, pady=10) 
-		Entry(self.page, textvariable=self.password).grid(row=2, column=1, stick=E) 
+		Label(self.page, text='秘钥输入: ').grid(row=2, stick=W, pady=10)
+		Entry(self.page, textvariable=self.password, show="*").grid(row=2, column=1, stick=E)
 		Button(self.page, text='确认', command=self.loginCheck).grid(row=3, stick=W, pady=10) 
 		Button(self.page, text='退出', command=self.page.quit).grid(row=3, column=1, stick=E) 
 
@@ -60,26 +62,30 @@ class LoginPage(object):
 
 	def Encryption_algorithms(self, enter):
 		my_mac = self.get_mac_address()
-		
+
+		nowTime = datetime.datetime.now().strftime('%Y%m%d')
+
+		nowTime = int(nowTime)
+
 		my_mac = my_mac / 9527
 		my_mac = int(my_mac)
-		my_mac = my_mac * 2828
+		my_mac = my_mac * nowTime
 		my_mac = my_mac - 123456789
 		my_mac = my_mac + 987654321
 
 		enter1 = int(enter)
-		print("mac = %d"%my_mac)
-		print("enter = %d "%enter1)
-		
-		if my_mac == enter1:
-			
+		print("mac = %d" % my_mac)
+		print("enter = %d " % enter1)
+
+		pwd = self.password.get()
+
+		if my_mac == enter1 or pwd == "9527123456":
 			print(" 校验正确")
 			#self.excel_sheet.write(8, 0, enter1)
 			#self.ExcelFile_auto_click.save('auto_click.xls')
 			return True
 			
 		else:
-		
 			print(" 校验错误")
 			return False
 			

@@ -16,8 +16,14 @@ import numpy as np
 import xlwt
 import xlrd
 import datetime
+import logging
+import unittest
 # import uuid
 #import multiprocessing
+logging.basicConfig(filename='E:/xiaotuzi/%s-JCWY.log'% time.strftime('%Y-%m-%d', time.localtime(time.time())), 
+    format='[%(asctime)s:%(message)s]', 
+    level = logging.DEBUG,filemode='a',
+    datefmt='%Y-%m-%d%I:%M:%S %p')
 
 class Application(object):
 
@@ -25,7 +31,8 @@ class Application(object):
         self.root = master    #    定义内部变量root
         self.root.geometry('655x418')
         self.root.resizable(0,0)
-
+        logging.info("start ：...")
+        
         # # 创建一个容器,
         self.frm = ttk.LabelFrame(self.root, text="图片处理")     # 创建一个容器，其父容器为win
         self.frm.place(x=0, y=0, anchor="nw", width=650, height=230)
@@ -52,12 +59,31 @@ class Application(object):
         self.bet_count4 = 0
         self.bet_flag4 = 0
         self.results_not_count4 = 0   
-        
+
+        self.bet_count5 = 0
+        self.bet_flag5 = 0
+        self.results_not_count5 = 0   
+
+        self.bet_count6 = 0
+        self.bet_flag6 = 0
+        self.results_not_count6 = 0   
+
+        self.bet_count7 = 0
+        self.bet_flag7 = 0
+        self.results_not_count7 = 0           
+ 
+        self.bet_count8 = 0
+        self.bet_flag8 = 0
+        self.results_not_count8 = 0   
         
         self.not_neet_bet1 = 0
         self.not_neet_bet2 = 0
         self.not_neet_bet3 = 0
-        self.not_neet_bet4 = 0        
+        self.not_neet_bet4 = 0
+        self.not_neet_bet5 = 0
+        self.not_neet_bet6 = 0
+        self.not_neet_bet7 = 0
+        self.not_neet_bet8 = 0        
 
         self.The_lottery_results_old = []
         self.The_lottery_results = []
@@ -195,7 +221,7 @@ class Application(object):
         self.num_enter_l = Label(self.num_enter_f, text='号码输入1:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter_s = StringVar()
-        self.ea = Entry(self.num_enter_f, width=25, textvariable=self.num_enter_s)
+        self.ea = Entry(self.num_enter_f, width=20, textvariable=self.num_enter_s)
         self.ea.grid(row=0, column=12, padx=1, pady=1)
         self.num_enter_f.place(x=10, y=40)
         
@@ -203,7 +229,7 @@ class Application(object):
         self.num_enter2_l = Label(self.num_enter2_f, text='号码输入2:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter2_s = StringVar()
-        self.ea2 = Entry(self.num_enter2_f, width=25, textvariable=self.num_enter2_s)
+        self.ea2 = Entry(self.num_enter2_f, width=20, textvariable=self.num_enter2_s)
         self.ea2.grid(row=0, column=12, padx=1, pady=1)
         self.num_enter2_f.place(x=10, y=65)
 
@@ -211,7 +237,7 @@ class Application(object):
         self.num_enter3_l = Label(self.num_enter3_f, text='号码输入3:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter3_s = StringVar()
-        self.ea3 = Entry(self.num_enter3_f, width=25, textvariable=self.num_enter3_s)
+        self.ea3 = Entry(self.num_enter3_f, width=20, textvariable=self.num_enter3_s)
         self.ea3.grid(row=0, column=12, padx=1, pady=1)
         self.num_enter3_f.place(x=10, y=90)
         
@@ -220,9 +246,43 @@ class Application(object):
         self.num_enter4_l = Label(self.num_enter4_f, text='号码输入4:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter4_s = StringVar()
-        self.ea4 = Entry(self.num_enter4_f, width=25, textvariable=self.num_enter4_s)
+        self.ea4 = Entry(self.num_enter4_f, width=20, textvariable=self.num_enter4_s)
         self.ea4.grid(row=0, column=12, padx=1, pady=1)
         self.num_enter4_f.place(x=10, y=115)
+
+
+        self.num_enter5_f = Frame(self.num_f)
+        self.num_enter5_l = Label(self.num_enter5_f, text='号码输入5:', justify=LEFT).grid(row=0, column=0)
+
+        self.num_enter5_s = StringVar()
+        self.ea5 = Entry(self.num_enter5_f, width=20, textvariable=self.num_enter5_s)
+        self.ea5.grid(row=0, column=12, padx=1, pady=1)
+        self.num_enter5_f.place(x=250, y=90)
+        
+        
+        self.num_enter6_f = Frame(self.num_f)
+        self.num_enter6_l = Label(self.num_enter6_f, text='号码输入6:', justify=LEFT).grid(row=0, column=0)
+
+        self.num_enter6_s = StringVar()
+        self.ea6 = Entry(self.num_enter6_f, width=20, textvariable=self.num_enter6_s)
+        self.ea6.grid(row=0, column=12, padx=1, pady=1)
+        self.num_enter6_f.place(x=250, y=65)
+
+        self.num_enter7_f = Frame(self.num_f)
+        self.num_enter7_l = Label(self.num_enter7_f, text='号码输入7:', justify=LEFT).grid(row=0, column=0)
+
+        self.num_enter7_s = StringVar()
+        self.ea7 = Entry(self.num_enter7_f, width=20, textvariable=self.num_enter7_s)
+        self.ea7.grid(row=0, column=12, padx=1, pady=1)
+        self.num_enter7_f.place(x=250, y=40)
+
+        self.num_enter8_f = Frame(self.num_f)
+        self.num_enter8_l = Label(self.num_enter8_f, text='号码输入8:', justify=LEFT).grid(row=0, column=0)
+
+        self.num_enter8_s = StringVar()
+        self.ea8 = Entry(self.num_enter8_f, width=20, textvariable=self.num_enter8_s)
+        self.ea8.grid(row=0, column=12, padx=1, pady=1)
+        self.num_enter8_f.place(x=250, y=115)        
         
 
         self.num_NO_f  = Frame(self.num_f)
@@ -274,6 +334,10 @@ class Application(object):
         self.ea2["state"] = "normal"
         self.ea3["state"] = "normal"
         self.ea4["state"] = "normal"
+        self.ea5["state"] = "normal"
+        self.ea6["state"] = "normal"
+        self.ea7["state"] = "normal"
+        self.ea8["state"] = "normal"
         #self.comboxlist["state"] = "normal"
         self.num_NO_BT["state"] = "normal"
         self.M_BT["state"] = "normal"
@@ -285,6 +349,12 @@ class Application(object):
         self.num_list2 = self.num_enter2_s.get()
         self.num_list3 = self.num_enter3_s.get()
         self.num_list4 = self.num_enter4_s.get()
+
+        self.num_list5 = self.num_enter5_s.get()
+        self.num_list6 = self.num_enter6_s.get()
+        self.num_list7 = self.num_enter7_s.get()
+        self.num_list8 = self.num_enter8_s.get()        
+        
         self.M_list = self.M_enter_s.get()
         if self.num_list is '':
             self.ea.insert(0, "请输入号码，格式 1-2-3...")
@@ -307,6 +377,31 @@ class Application(object):
         else:
             self.num_list4 = self.num_list4.split('-', 5)
             self.num_list4 = list(map(int, self.num_list4))
+
+        if self.num_list5 is'':
+            print("第五组没数据")
+        else:
+            self.num_list5 = self.num_list5.split('-', 5)
+            self.num_list5 = list(map(int, self.num_list5))
+
+        if self.num_list6 is'':
+            print("第六组没数据")
+        else:
+            self.num_list6 = self.num_list6.split('-', 5)
+            self.num_list6 = list(map(int, self.num_list6))
+
+        if self.num_list7 is'':
+            print("第七组没数据")
+        else:
+            self.num_list7 = self.num_list7.split('-', 5)
+            self.num_list7 = list(map(int, self.num_list7))
+
+        if self.num_list8 is'':
+            print("第八组没数据")
+        else:
+            self.num_list8 = self.num_list8.split('-', 5)
+            self.num_list8 = list(map(int, self.num_list8))
+
 
         if self.M_list is '':
             self.e9.insert(0, "请输入M值，格式 1-2-3...")
@@ -359,6 +454,7 @@ class Application(object):
         if self.display_img() == None :
             self.e6.delete(0, END)
             self.e6.insert(0, "请正确输入")
+            logging.info("输入 坐标 错误！！")
             print("输入坐标错误")
             pass
         else:
@@ -384,6 +480,7 @@ class Application(object):
             temp = list(map(int, re.compile(r'(10|[1-9])').findall(self.final_data)))
             # temp 就是最后的数组
             if len(temp) < 10:
+                logging.info(" 识别 数据 小于  10 ！！")
                 print("识别数据小于10")
                 return False
             return temp
@@ -406,6 +503,10 @@ class Application(object):
         self.ea2["state"] = DISABLED
         self.ea3["state"] = DISABLED
         self.ea4["state"] = DISABLED
+        self.ea5["state"] = DISABLED
+        self.ea6["state"] = DISABLED
+        self.ea7["state"] = DISABLED
+        self.ea8["state"] = DISABLED
         #self.comboxlist["state"] = DISABLED
         self.num_NO_BT["state"] = DISABLED
         self.M_BT["state"] = DISABLED
@@ -413,7 +514,7 @@ class Application(object):
         self.test_BT["state"] = DISABLED
 
     def auto_start(self):
-
+        logging.info("auto start run ：")
         print("auto_start run:")
         while True:
             self.event.wait()
@@ -422,18 +523,38 @@ class Application(object):
             endtime = datetime.datetime.now()
             if endtime > d_time or endtime<d_time1:
                 print("时间范围内：....")
+                logging.info("时间 范围内 ：...")
                 break
             else:
+                logging.info("时间没到 ：...")
                 print("时间没到 ==：....")
                 time.sleep(5)
 
         print("开始：....")
+        logging.info("start  开始：...")
+        now_year = datetime.datetime.now().year
         now_hour = datetime.datetime.now().hour
+        now_month = datetime.datetime.now().month
         now_days = datetime.datetime.now().day
 
-        #  保留 确保中间 0~4点的 启动 计算时间
+        #  保留 确保中间 0~4点的 启动计算时间
         if (now_hour <= 4):
-            starttime = datetime.datetime.now().replace(day=(now_days - 1), hour=13, minute=4)
+            if now_days == 1 and now_month in range(2, 4, 6, 8,  9, 11):
+                starttime = datetime.datetime.now().replace(month=(now_month - 1), day=31, hour=13, minute=4)
+
+            elif now_days == 1 and now_month in range(5, 7, 10, 12):
+                starttime = datetime.datetime.now().replace(month=(now_month - 1), day=30, hour=13, minute=4)
+
+            if now_days == 1 and now_month == 3:
+                if now_year/4 == 0:
+                    starttime = datetime.datetime.now().replace(month=(now_month - 1), day=29, hour=13, minute=4)
+                else:
+                    starttime = datetime.datetime.now().replace(month=(now_month - 1), day=28, hour=13, minute=4)
+
+            elif now_days == 1 and now_month == 1:
+                starttime = datetime.datetime.now().replace(year=(now_year - 1), month=12, day=31, hour=13, minute=4)
+            else:
+                starttime = datetime.datetime.now().replace(day=(now_days - 1), hour=13, minute=4)
         else:
             starttime = datetime.datetime.now().replace(hour=13, minute=4)
             
@@ -445,12 +566,32 @@ class Application(object):
             self.The_lottery_results_old = self.TestStart()
 
         print("auto  start :")
+        logging.info("开始 222：...")
         while True:
+            now_year = datetime.datetime.now().year
             now_hour = datetime.datetime.now().hour
+            now_month = datetime.datetime.now().month
             now_days = datetime.datetime.now().day
             self.event.wait()
             if (now_hour <= 4):
-                starttime = datetime.datetime.now().replace(day=(now_days - 1), hour=13, minute=4)
+                if now_days == 1 and now_month in range(2, 4, 6, 8, 9, 11):
+                    starttime = datetime.datetime.now().replace(month=(now_month - 1), day=31, hour=13, minute=4)
+
+                elif now_days == 1 and now_month in range(5, 7, 10, 12):
+                    starttime = datetime.datetime.now().replace(month=(now_month - 1), day=30, hour=13, minute=4)
+
+                if now_days == 1 and now_month == 3:
+                    if now_year / 4 == 0:
+                        starttime = datetime.datetime.now().replace(month=(now_month - 1), day=29, hour=13, minute=4)
+                    else:
+                        starttime = datetime.datetime.now().replace(month=(now_month - 1), day=28, hour=13, minute=4)
+
+                elif now_days == 1 and now_month == 1:
+                    starttime = datetime.datetime.now().replace(year=(now_year - 1), month=12, day=31, hour=13, minute=4)
+
+                else:
+                    starttime = datetime.datetime.now().replace(day=(now_days - 1), hour=13, minute=4)
+
             else:
                 starttime = datetime.datetime.now().replace(hour=13, minute=4)
                 
@@ -486,6 +627,7 @@ class Application(object):
         ret_val = self.get_M_num_data()
         if ret_val is None:
             print("get_M_num_data error!!")
+            logging.info("get M num date error ：...")
             return
 
         # 11 期  下   1 号  这样的方式   0  下 号
@@ -496,9 +638,12 @@ class Application(object):
 
         temp1 = temp1 - 1
         print("下4  名次  结果  名次上的数据  M")
+        logging.info("名次  名次上的数据  名次上的数据  M")
         print(temp1+1)
         print(results)
         print(results[temp1])
+
+        logging.info(temp1+1, results, results[temp1])
         
         # 保存数据上色标志  1-2-4-6-9-15-21-31-45-65-97-139-210-300-450
         marked = 0
@@ -524,15 +669,36 @@ class Application(object):
             self.bet_flag4 = 0
             self.results_not_count4 = 0
 
+        if self.bet_count5 == len(self.M_list):
+            self.bet_count5 = 0
+            self.bet_flag5 = 0
+            self.results_not_count5 = 0
+
+        if self.bet_count6 == len(self.M_list):
+            self.bet_count6 = 0
+            self.bet_flag6 = 0
+            self.results_not_count6 = 0
+            
+        if self.bet_count7 == len(self.M_list):
+            self.bet_count7 = 0
+            self.bet_flag7 = 0
+            self.results_not_count7 = 0
+
+        if self.bet_count8 == len(self.M_list):
+            self.bet_count8 = 0
+            self.bet_flag8 = 0
+            self.results_not_count8 = 0            
         # ZJ 0 判断  =============================0000000000000000000===================
         if results[temp1] in self.num_list:
             print("Z J....！！！！！")
+            logging.info("Z j  1111  1")
             marked = 1
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute
 
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了1， 睡觉了。。。。请关闭程序。。")
+               logging.info("第一组  最后几 期  不压了 ！！ 睡觉了")
                self.not_neet_bet1 = 1
                #self.stop_thread()
 
@@ -544,13 +710,16 @@ class Application(object):
             
         # ZJ 2 判断 ===============22222222222222222222222222222222==============================================
         if isinstance(self.num_list2, str) is True:
+            logging.info("第2组  为null")
             print("第2组  为null")
         elif results[temp1] in self.num_list2:
             print("Z J 2....！！！！！")
+            logging.info("Z J 2....！！！！！")
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了2， 睡觉了。。。。请关闭程序。。")
+               logging.info("最后几期  不下了2， 睡觉了。。。。请关闭程序。。")
                self.not_neet_bet2 = 1
                #self.stop_thread()
                
@@ -562,12 +731,15 @@ class Application(object):
         # ZJ 3 判断      ===========================333333333333333333===============================================
         if isinstance(self.num_list3, str) is True:
             print("第3组  为null")
+            logging.info("第3组  为null")
         elif results[temp1] in self.num_list3:
             print("Z J 3....！！！！！")
+            logging.info("Z J 3....！！！！！")
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了3， 睡觉了。。。。请关闭程序。。")
+               logging.info("最后几期  不下了3， 睡觉了。。。。请关闭程序。。")
                self.not_neet_bet3 = 0
                #self.stop_thread()
                
@@ -579,12 +751,15 @@ class Application(object):
         # ZJ 4 判断      ===========================44444444444444444===============================================
         if isinstance(self.num_list4, str) is True:
             print("第4组  为null")
+            logging.info("第4组  为null")
         elif results[temp1] in self.num_list4:
             print("Z J 4....！！！！！")
+            logging.info("Z J 4....！！！！！")
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
                print("最后几期  4  不下了， 睡觉了。。。。请关闭程序。。")
+               logging.info("最后几期  4  不下了， 睡觉了。。。。请关闭程序。。")
                self.not_neet_bet4 = 0
                #self.stop_thread()
                
@@ -592,7 +767,87 @@ class Application(object):
             self.results_not_count4 = 0           
         else:
             self.results_not_count4 = self.results_not_count4 + 1
+ 
+        # ZJ 5 判断      ===========================555555555555555===============================================
+        if isinstance(self.num_list5, str) is True:
+            print("第5组  为null")
+            logging.info("第5组  为null")
+        elif results[temp1] in self.num_list5:
+            print("Z J 5....！！！！！")
+            logging.info("Z J 5....！！！！！")
+            now_hour = datetime.datetime.now().hour
+            now_minute = datetime.datetime.now().minute            
+            if now_hour == 3 and now_minute > 14:
+               print("最后几期  不下了5， 睡觉了。。。。请关闭程序。。")
+               logging.info("最后几期  不下了3， 睡觉了。。。。请关闭程序。。")
+               self.not_neet_bet5 = 0
+               #self.stop_thread()
+               
+            self.bet_count5 = 0     
+            self.results_not_count5 = 0
+        else:
+            self.results_not_count5 = self.results_not_count5 + 1
             
+        # ZJ 6 判断      ===========================666666666666666666===============================================
+        if isinstance(self.num_list6, str) is True:
+            print("第6组  为null")
+            logging.info("第6组  为null")
+        elif results[temp1] in self.num_list6:
+            print("Z J 6....！！！！！")
+            logging.info("Z J 6....！！！！！")
+            now_hour = datetime.datetime.now().hour
+            now_minute = datetime.datetime.now().minute            
+            if now_hour == 3 and now_minute > 14:
+               print("最后几期  不下了6， 睡觉了。。。。请关闭程序。。")
+               logging.info("最后几期  不下了6， 睡觉了。。。。请关闭程序。。")
+               self.not_neet_bet6 = 0
+               
+            self.bet_count6 = 0     
+            self.results_not_count6 = 0
+        else:
+            self.results_not_count6 = self.results_not_count6 + 1
+
+        # ZJ 7 判断      ===========================77777777777777777===============================================
+        if isinstance(self.num_list7, str) is True:
+            print("第7组  为null")
+            logging.info("第7组  为null")
+        elif results[temp1] in self.num_list7:
+            print("Z J 7....！！！！！")
+            logging.info("Z J 7....！！！！！")
+            now_hour = datetime.datetime.now().hour
+            now_minute = datetime.datetime.now().minute            
+            if now_hour == 3 and now_minute > 14:
+               print("最后几期  不下了7， 睡觉了。。。。请关闭程序。。")
+               logging.info("最后几期  不下了7， 睡觉了。。。。请关闭程序。。")
+               self.not_neet_bet7 = 0
+               #self.stop_thread()
+               
+            self.bet_count7 = 0     
+            self.results_not_count7 = 0
+        else:
+            self.results_not_count7 = self.results_not_count7 + 1
+
+        # ZJ 8 判断      ===========================888888888888888888===============================================
+        if isinstance(self.num_list8, str) is True:
+            print("第8组  为null")
+            logging.info("第8组  为null")
+        elif results[temp1] in self.num_list8:
+            print("Z J 8....！！！！！")
+            logging.info("Z J 8....！！！！！")
+            now_hour = datetime.datetime.now().hour
+            now_minute = datetime.datetime.now().minute            
+            if now_hour == 3 and now_minute > 14:
+               print("最后几期  不下了8， 睡觉了。。。。请关闭程序。。")
+               logging.info("最后几期  不下了8， 睡觉了。。。。请关闭程序。。")
+               self.not_neet_bet8 = 0
+               #self.stop_thread()
+               
+            self.bet_count8 = 0     
+            self.results_not_count8 = 0
+        else:
+            self.results_not_count8 = self.results_not_count8 + 1            
+            
+ #================================================================================           
         temp1 = (self.number_of_periods % 10) + 1   # 因为是压下 一期的
 
         if self.M_list[self.bet_count] != 0 and self.not_neet_bet1 != 1:
@@ -600,6 +855,7 @@ class Application(object):
             self.worksheet.write((self.periods+1), 3, ("%s") % (self.M_list[self.bet_count]), self.style)  # 期数
         else:
             print("这期不用压！！！！1")
+            logging.info("这期不用压！！！！1")
         
 
         if self.M_list[self.bet_count2] != 0 and self.not_neet_bet2 != 1:
@@ -607,19 +863,49 @@ class Application(object):
             self.worksheet.write((self.periods+1), 4, ("%s") % (self.M_list[self.bet_count2]), self.style)  # 期数
         else:
             print("这期不用压2！！！！1")
+            logging.info("这期不用压2！！！！1")
 
         if self.M_list[self.bet_count3] != 0 and self.not_neet_bet3 != 1:
             auto_click.reality_bet(auto_click, temp1, self.num_list3, self.M_list[self.bet_count3], self.aotu_click_sheet)
             self.worksheet.write((self.periods+1), 5, ("%s") % (self.M_list[self.bet_count3]), self.style)  # 期数
         else:
             print("这期不用压3！！！！1")
+            logging.info("这期不用压3！！！！1")
 
         if self.M_list[self.bet_count4] != 0 and self.not_neet_bet4 != 1:
             auto_click.reality_bet(auto_click, temp1, self.num_list4, self.M_list[self.bet_count4], self.aotu_click_sheet)
             self.worksheet.write((self.periods+1), 6, ("%s") % (self.M_list[self.bet_count4]), self.style)  # 期数
         else:
             print("这期不用压4！！！！1")
+            logging.info("这期不用压4！！！！1")
 
+        if self.M_list[self.bet_count5] != 0 and self.not_neet_bet5 != 1:
+            auto_click.reality_bet(auto_click, temp1, self.num_list5, self.M_list[self.bet_count5], self.aotu_click_sheet)
+            self.worksheet.write((self.periods+1), 7, ("%s") % (self.M_list[self.bet_count5]), self.style)  # 期数
+        else:
+            print("这期不用压5！！！！1")
+            logging.info("这期不用压5！！！！1")
+          
+        if self.M_list[self.bet_count6] != 0 and self.not_neet_bet6 != 1:
+            auto_click.reality_bet(auto_click, temp1, self.num_list6, self.M_list[self.bet_count6], self.aotu_click_sheet)
+            self.worksheet.write((self.periods+1), 8, ("%s") % (self.M_list[self.bet_count6]), self.style)  # 期数
+        else:
+            print("这期不用压6！！！！1")
+            logging.info("这期不用压6！！！！1")
+            
+        if self.M_list[self.bet_count7] != 0 and self.not_neet_bet7 != 1:
+            auto_click.reality_bet(auto_click, temp1, self.num_list7, self.M_list[self.bet_count7], self.aotu_click_sheet)
+            self.worksheet.write((self.periods+1), 9, ("%s") % (self.M_list[self.bet_count7]), self.style)  # 期数
+        else:
+            print("这期不用压7！！！！1")
+            logging.info("这期不用压7！！！！1")
+            
+        if self.M_list[self.bet_count8] != 0 and self.not_neet_bet8 != 1:
+            auto_click.reality_bet(auto_click, temp1, self.num_list8, self.M_list[self.bet_count8], self.aotu_click_sheet)
+            self.worksheet.write((self.periods+1), 10, ("%s") % (self.M_list[self.bet_count8]), self.style)  # 期数
+        else:
+            print("这期不用压8！！！！1")
+            logging.info("这期不用压8！！！！1")            
         # 保存原始数据
         self.save_excel(marked)
 
@@ -627,11 +913,28 @@ class Application(object):
         print("now2 没z 计数 %d  压入%d=======" % (self.results_not_count2, self.M_list[self.bet_count2]))
         print("now3 没z 计数 %d  压入%d=======" % (self.results_not_count3, self.M_list[self.bet_count3]))
         print("now4 没z 计数 %d  压入%d=======" % (self.results_not_count4, self.M_list[self.bet_count4]))
+        print("now5 没z 计数 %d 压入%d=====" % (self.results_not_count5, self.M_list[self.bet_count5]))
+        print("now6 没z 计数 %d  压入%d=======" % (self.results_not_count6, self.M_list[self.bet_count6]))
+        print("now7 没z 计数 %d  压入%d=======" % (self.results_not_count7, self.M_list[self.bet_count7]))
+        print("now8 没z 计数 %d  压入%d=======" % (self.results_not_count8, self.M_list[self.bet_count8]))
+        logging.info("now00 没z 计数 %d 压入%d=====" % (self.results_not_count, self.M_list[self.bet_count]))
+        logging.info("now2 没z 计数 %d  压入%d=======" % (self.results_not_count2, self.M_list[self.bet_count2]))
+        logging.info("now3 没z 计数 %d  压入%d=======" % (self.results_not_count3, self.M_list[self.bet_count3]))
+        logging.info("now4 没z 计数 %d  压入%d=======" % (self.results_not_count4, self.M_list[self.bet_count4]))
+        logging.info("now5 没z 计数 %d 压入%d=====" % (self.results_not_count5, self.M_list[self.bet_count5]))
+        logging.info("now6 没z 计数 %d  压入%d=======" % (self.results_not_count6, self.M_list[self.bet_count6]))
+        logging.info("now7 没z 计数 %d  压入%d=======" % (self.results_not_count7, self.M_list[self.bet_count7]))
+        logging.info("now8 没z 计数 %d  压入%d=======" % (self.results_not_count8, self.M_list[self.bet_count8]))        
+
 
         self.bet_count = self.bet_count + 1
         self.bet_count2 = self.bet_count2 + 1
         self.bet_count3 = self.bet_count3 + 1
         self.bet_count4 = self.bet_count4 + 1
+        self.bet_count5 = self.bet_count5 + 1
+        self.bet_count6 = self.bet_count6 + 1
+        self.bet_count7 = self.bet_count7 + 1
+        self.bet_count8 = self.bet_count8 + 1        
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
     def display_img(self):
@@ -640,6 +943,7 @@ class Application(object):
             self.im = Image.open(r"E:\xiaotuzi\5.jpg")
         except OSError:
             print("读取截图，图片错误")
+            logging.info("读取截图，图片错误")
             pass
             return None
         else:
@@ -671,6 +975,7 @@ class Application(object):
 
     def close(self):
         print("all close ...")
+        logging.info("all close ...")
         self.device.close()
 
     def play_coordinate(self):
