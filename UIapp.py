@@ -20,8 +20,8 @@ import logging
 import unittest
 # import uuid
 #import multiprocessing
-logging.basicConfig(filename='E:/xiaotuzi/%s-JCWY.log'% time.strftime('%Y-%m-%d', time.localtime(time.time())), 
-    format='[%(asctime)s:%(message)s]', 
+logging.basicConfig(filename='E:/xiaotuzi/%s-JCWY'% time.strftime('%Y-%m-%d', time.localtime(time.time())), 
+    format='%(asctime)s:%(message)s', 
     level = logging.DEBUG,filemode='a',
     datefmt='%Y-%m-%d%I:%M:%S %p')
 
@@ -34,11 +34,11 @@ class Application(object):
         logging.info("start ：...")
         
         # # 创建一个容器,
-        self.frm = ttk.LabelFrame(self.root, text="图片处理")     # 创建一个容器，其父容器为win
+        self.frm = ttk.LabelFrame(self.root, text="picture processing")     # 创建一个容器，其父容器为win
         self.frm.place(x=0, y=0, anchor="nw", width=650, height=230)
         self.frm_p = Frame(self.frm)
 
-        self.num_f = ttk.LabelFrame(self.root, text="数据处理")     # 创建一个容器，其父容器为win
+        self.num_f = ttk.LabelFrame(self.root, text="data processing")     # 创建一个容器，其父容器为win
         self.num_f.place(x=0, y=235, anchor="nw", width=650, height=180)
         self.frm_num = Frame(self.num_f)
 
@@ -163,25 +163,25 @@ class Application(object):
         self.e4.grid(row=0, column=7, padx=1, pady=1)
 
         self.test_BT_f = Frame(self.frm)
-        self.test_BT = Button(self.test_BT_f, text='开始测试', width=10, command=self.TestStart)
+        self.test_BT = Button(self.test_BT_f, text='startTest', width=10, command=self.TestStart)
         self.test_BT.grid(row=0, column=4, padx=1, pady=1)
         self.test_BT_f.place(x=550, y=25)
 
         self.stop_BT_F = Frame(self.frm)
-        self.stop_BT = Button(self.stop_BT_F, text='暂停铺抓', width=10, command=self.stop_thread)
+        self.stop_BT = Button(self.stop_BT_F, text='pause', width=10, command=self.stop_thread)
         self.stop_BT .grid(row=0, column=4, padx=1, pady=1)
         self.stop_BT_F.place(x=550, y=70)
 
 
         self.start_BT_F = Frame(self.frm)
-        self.start_BT = Button(self.start_BT_F, text='开始铺抓', width=10, command=self.start_auto_thread)
+        self.start_BT = Button(self.start_BT_F, text='startCatch', width=10, command=self.start_auto_thread)
         self.start_BT .grid(row=0, column=4, padx=1, pady=1)
         self.start_BT_F.place(x=550, y=120)
 
 
 # # -------------清理条 输入 ---------------------------------------------------------
         self.clean_pixel_f = Frame(self.frm)
-        self.clean_pixel_l = Label(self.clean_pixel_f, text='清理坐标:', justify=LEFT).grid(row=0, column=11)
+        self.clean_pixel_l = Label(self.clean_pixel_f, text='xy-clean:', justify=LEFT).grid(row=0, column=11)
 
         self.clean_pixel = StringVar()
         self.e6 = Entry(self.clean_pixel_f, width=50, textvariable=self.clean_pixel, justify=LEFT)
@@ -190,7 +190,7 @@ class Application(object):
 
 # # -------------鼠标 坐标------------------------------------------------------------------
         self.mouse_f = Frame(self.frm)
-        self.mouse_l = Label(self.mouse_f, text='坐标:', justify=LEFT).grid(row=0, column=11)
+        self.mouse_l = Label(self.mouse_f, text='coordinate:', justify=LEFT).grid(row=0, column=11)
 
         self.set_xy = StringVar()
         self.Temp = ("%s.%s") % get_mouse_point()
@@ -201,7 +201,7 @@ class Application(object):
 
 # # -------------识别结果------------------------------------------------------------------
         self.recognition_f = Frame(self.frm)
-        self.recognition_l = Label(self.recognition_f, text='识别结果:', justify=LEFT).grid(row=0, column=11)
+        self.recognition_l = Label(self.recognition_f, text='result :', justify=LEFT).grid(row=0, column=11)
 
         self.e8 = Entry(self.recognition_f, width=50, textvariable=self.final_data)
         self.e8 .grid(row=0, column=12, padx=1, pady=1)
@@ -210,7 +210,7 @@ class Application(object):
 # # ****************************     数据处理layout    **************************************************
 # # -----------------------------------------------------------------------------------------------------
         self.M_enter_f = Frame(self.num_f)
-        self.M_enter_l = Label(self.M_enter_f, text='M 输 入 :', justify=LEFT).grid(row=0, column=0)
+        self.M_enter_l = Label(self.M_enter_f, text='M-number :', justify=LEFT).grid(row=0, column=0)
 
         self.M_enter_s = StringVar()
         self.e9 = Entry(self.M_enter_f, width=50, textvariable=self.M_enter_s)
@@ -218,7 +218,7 @@ class Application(object):
         self.M_enter_f.place(x=10, y=10)
 
         self.num_enter_f = Frame(self.num_f)
-        self.num_enter_l = Label(self.num_enter_f, text='号码输入1:', justify=LEFT).grid(row=0, column=0)
+        self.num_enter_l = Label(self.num_enter_f, text='NO1:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter_s = StringVar()
         self.ea = Entry(self.num_enter_f, width=20, textvariable=self.num_enter_s)
@@ -226,7 +226,7 @@ class Application(object):
         self.num_enter_f.place(x=10, y=40)
         
         self.num_enter2_f = Frame(self.num_f)
-        self.num_enter2_l = Label(self.num_enter2_f, text='号码输入2:', justify=LEFT).grid(row=0, column=0)
+        self.num_enter2_l = Label(self.num_enter2_f, text='NO2:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter2_s = StringVar()
         self.ea2 = Entry(self.num_enter2_f, width=20, textvariable=self.num_enter2_s)
@@ -234,7 +234,7 @@ class Application(object):
         self.num_enter2_f.place(x=10, y=65)
 
         self.num_enter3_f = Frame(self.num_f)
-        self.num_enter3_l = Label(self.num_enter3_f, text='号码输入3:', justify=LEFT).grid(row=0, column=0)
+        self.num_enter3_l = Label(self.num_enter3_f, text='NO3:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter3_s = StringVar()
         self.ea3 = Entry(self.num_enter3_f, width=20, textvariable=self.num_enter3_s)
@@ -243,7 +243,7 @@ class Application(object):
         
 
         self.num_enter4_f = Frame(self.num_f)
-        self.num_enter4_l = Label(self.num_enter4_f, text='号码输入4:', justify=LEFT).grid(row=0, column=0)
+        self.num_enter4_l = Label(self.num_enter4_f, text='NO4:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter4_s = StringVar()
         self.ea4 = Entry(self.num_enter4_f, width=20, textvariable=self.num_enter4_s)
@@ -252,7 +252,7 @@ class Application(object):
 
 
         self.num_enter5_f = Frame(self.num_f)
-        self.num_enter5_l = Label(self.num_enter5_f, text='号码输入5:', justify=LEFT).grid(row=0, column=0)
+        self.num_enter5_l = Label(self.num_enter5_f, text='NO5:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter5_s = StringVar()
         self.ea5 = Entry(self.num_enter5_f, width=20, textvariable=self.num_enter5_s)
@@ -261,7 +261,7 @@ class Application(object):
         
         
         self.num_enter6_f = Frame(self.num_f)
-        self.num_enter6_l = Label(self.num_enter6_f, text='号码输入6:', justify=LEFT).grid(row=0, column=0)
+        self.num_enter6_l = Label(self.num_enter6_f, text='NO6:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter6_s = StringVar()
         self.ea6 = Entry(self.num_enter6_f, width=20, textvariable=self.num_enter6_s)
@@ -269,7 +269,7 @@ class Application(object):
         self.num_enter6_f.place(x=250, y=65)
 
         self.num_enter7_f = Frame(self.num_f)
-        self.num_enter7_l = Label(self.num_enter7_f, text='号码输入7:', justify=LEFT).grid(row=0, column=0)
+        self.num_enter7_l = Label(self.num_enter7_f, text='NO7:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter7_s = StringVar()
         self.ea7 = Entry(self.num_enter7_f, width=20, textvariable=self.num_enter7_s)
@@ -277,7 +277,7 @@ class Application(object):
         self.num_enter7_f.place(x=250, y=40)
 
         self.num_enter8_f = Frame(self.num_f)
-        self.num_enter8_l = Label(self.num_enter8_f, text='号码输入8:', justify=LEFT).grid(row=0, column=0)
+        self.num_enter8_l = Label(self.num_enter8_f, text='NO8:', justify=LEFT).grid(row=0, column=0)
 
         self.num_enter8_s = StringVar()
         self.ea8 = Entry(self.num_enter8_f, width=20, textvariable=self.num_enter8_s)
@@ -286,20 +286,20 @@ class Application(object):
         
 
         self.num_NO_f  = Frame(self.num_f)
-        self.num_NO_BT = Button(self.num_NO_f, text='名号测试', width=10, command=lambda: auto_click.NO_Num_BT(auto_click, self.aotu_click_sheet))
+        self.num_NO_BT = Button(self.num_NO_f, text='R_M_test', width=10, command=lambda: auto_click.NO_Num_BT(auto_click, self.aotu_click_sheet))
         self.num_NO_BT.grid(row=0, column=4, padx=1, pady=1)
         # Button(self.num_NO_f, text='名号测试', width=10, command='') \
         #     .grid(row=0, column=4, sticky=E, padx=1, pady=1)
         self.num_NO_f.place(x=550, y=40)
 
         self.M_f = Frame(self.num_f)
-        self.M_BT = Button(self.M_f, text='M 测试', width=10, command=lambda: auto_click.M_BT(auto_click, self.aotu_click_sheet))
+        self.M_BT = Button(self.M_f, text='M tese', width=10, command=lambda: auto_click.M_BT(auto_click, self.aotu_click_sheet))
         self.M_BT.grid(row=0, column=4, padx=1, pady=1)
         self.M_f.place(x=550, y=80)
 
         self.M_list = self.M_enter_s.get()
         self.reality_f = Frame(self.num_f)
-        self.reality_BT = Button(self.reality_f, text='真实模拟测试', width=10, command=lambda: auto_click.reality_BT(auto_click, self.aotu_click_sheet))
+        self.reality_BT = Button(self.reality_f, text='real test', width=10, command=lambda: auto_click.reality_BT(auto_click, self.aotu_click_sheet))
         self.reality_BT.grid(row=0, column=4, padx=1, pady=1)
         self.reality_f.place(x=550, y=120)
 
@@ -316,7 +316,7 @@ class Application(object):
         # temp2 = [5,2,6,3,10,4,1,9,8,7]
         # self.number_of_periods = 140
         self.test_f = Frame(self.num_f)
-        self.test_BT = Button(self.test_f, text='暂时测试', width=10, command=lambda: self.test_BT_fun())
+        self.test_BT = Button(self.test_f, text='ZStest', width=10, command=lambda: self.test_BT_fun())
         self.test_BT.grid(row=0, column=4, padx=1, pady=1)
         self.test_f.place(x=550, y=0)
 
@@ -539,10 +539,10 @@ class Application(object):
 
         #  保留 确保中间 0~4点的 启动计算时间
         if (now_hour <= 4):
-            if now_days == 1 and now_month in range(2, 4, 6, 8,  9, 11):
+            if now_days == 1 and now_month in (2, 4, 6, 8,  9, 11):
                 starttime = datetime.datetime.now().replace(month=(now_month - 1), day=31, hour=13, minute=4)
 
-            elif now_days == 1 and now_month in range(5, 7, 10, 12):
+            elif now_days == 1 and now_month in (5, 7, 10, 12):
                 starttime = datetime.datetime.now().replace(month=(now_month - 1), day=30, hour=13, minute=4)
 
             if now_days == 1 and now_month == 3:
@@ -574,10 +574,10 @@ class Application(object):
             now_days = datetime.datetime.now().day
             self.event.wait()
             if (now_hour <= 4):
-                if now_days == 1 and now_month in range(2, 4, 6, 8, 9, 11):
+                if now_days == 1 and now_month in (2, 4, 6, 8, 9, 11):
                     starttime = datetime.datetime.now().replace(month=(now_month - 1), day=31, hour=13, minute=4)
 
-                elif now_days == 1 and now_month in range(5, 7, 10, 12):
+                elif now_days == 1 and now_month in (5, 7, 10, 12):
                     starttime = datetime.datetime.now().replace(month=(now_month - 1), day=30, hour=13, minute=4)
 
                 if now_days == 1 and now_month == 3:
@@ -643,7 +643,9 @@ class Application(object):
         print(results)
         print(results[temp1])
 
-        logging.info(temp1+1, results, results[temp1])
+        logging.info(temp1+1)
+        logging.info(results)
+        logging.info(results[temp1])
         
         # 保存数据上色标志  1-2-4-6-9-15-21-31-45-65-97-139-210-300-450
         marked = 0

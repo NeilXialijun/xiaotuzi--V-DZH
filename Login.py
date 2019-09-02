@@ -44,7 +44,7 @@ class LoginPage(object):
 
 	def loginCheck(self): 
 		secret = self.password.get() 
-		print(secret)
+		#print(secret)
 		return_value = self.Encryption_algorithms(secret)
 		if return_value == True:
 			self.ExcelFile_auto_click.release_resources()
@@ -75,7 +75,7 @@ class LoginPage(object):
 
 		enter1 = int(enter)
 		print("mac = %d" % my_mac)
-		print("enter = %d " % enter1)
+		#print("enter = %d " % enter1)
 
 		pwd = self.password.get()
 
@@ -108,16 +108,3 @@ class LoginPage(object):
 		temp = self.keys_confirm()
 		
 		return self.Encryption_algorithms(temp)
-		
-
-
-
-
-
-
-
-
-
-
-
-
