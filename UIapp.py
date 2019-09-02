@@ -132,11 +132,11 @@ class Application(object):
 
     def createWidgets(self):
         self.frm_x = Frame(self.frm)
-        self.Label1 = Label(self.frm_x, text='X坐标开始:').grid(row=0, column=0)
+        self.Label1 = Label(self.frm_x, text='X start:').grid(row=0, column=0)
         self.frm_x.place(x=0, y=50)
 
         self.frm_y = Frame(self.frm)
-        self.Label2 = Label(self.frm_y, text='Y坐标开始:').grid(row=0, column=2)
+        self.Label2 = Label(self.frm_y, text='Y start:').grid(row=0, column=2)
         self.frm_y.place(x=100, y=50)
 
         self.X_coordinate = IntVar()
@@ -150,8 +150,8 @@ class Application(object):
 # # ====================================================================================
         self.frm_xx = Frame(self.frm)
         self.frm_yy = Frame(self.frm)
-        self.Labe1 = Label(self.frm_xx, text='X坐标终点:', justify=LEFT).grid(row=0, column=4)
-        self.Labe2 = Label(self.frm_yy, text='Y坐标终点:', justify=LEFT).grid(row=0, column=6)
+        self.Labe1 = Label(self.frm_xx, text='X end:', justify=LEFT).grid(row=0, column=4)
+        self.Labe2 = Label(self.frm_yy, text='Y end:', justify=LEFT).grid(row=0, column=6)
         self.frm_xx.place(x=300, y=50)
         self.frm_yy.place(x=400, y=50)
 
