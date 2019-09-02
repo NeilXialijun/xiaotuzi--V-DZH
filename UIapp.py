@@ -20,6 +20,7 @@ import logging
 import unittest
 # import uuid
 #import multiprocessing
+
 logging.basicConfig(filename='E:/xiaotuzi/%s-JCWY'% time.strftime('%Y-%m-%d', time.localtime(time.time())), 
     format='%(asctime)s:%(message)s', 
     level = logging.DEBUG,filemode='a',
