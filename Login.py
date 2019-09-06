@@ -81,9 +81,9 @@ class LoginPage(object):
 		my_mac1 = my_mac1 + 987654321
 
 		enter1 = int(enter)
-		print("mac = %d" % my_mac)
-		print("enter = %d " % enter1)
-		print("my_mac1 = %d " % my_mac1)
+		#print("mac = %d" % my_mac)
+		#print("enter = %d " % enter1)
+		#print("my_mac1 = %d " % my_mac1)
 
 
 		if my_mac1 == enter2 or enter == "9527123456" or my_mac == enter1:
