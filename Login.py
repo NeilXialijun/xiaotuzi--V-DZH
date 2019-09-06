@@ -45,7 +45,7 @@ class LoginPage(object):
 	def loginCheck(self): 
 		secret = self.password.get() 
 		#print(secret)
-		return_value = self.Encryption_algorithms(secret)
+		return_value = self.Encryption_algorithms(secret,0)
 		if return_value == True:
 			self.ExcelFile_auto_click.release_resources()
 			Application(self.root)
@@ -60,8 +60,9 @@ class LoginPage(object):
 		mac = int(mac, 16)
 		return mac
 
-	def Encryption_algorithms(self, enter):
+	def Encryption_algorithms(self, enter, enter2):
 		my_mac = self.get_mac_address()
+		my_mac1 = my_mac
 
 		nowTime = datetime.datetime.now().strftime('%Y%m%d')
 
@@ -73,13 +74,19 @@ class LoginPage(object):
 		my_mac = my_mac - 123456789
 		my_mac = my_mac + 987654321
 
+		my_mac1 = my_mac1 / 9527
+		my_mac1 = int(my_mac1)
+		my_mac1 = my_mac1 * 525734
+		my_mac1 = my_mac1 - 123456789
+		my_mac1 = my_mac1 + 987654321
+
 		enter1 = int(enter)
 		print("mac = %d" % my_mac)
-		#print("enter = %d " % enter1)
+		print("enter = %d " % enter1)
+		print("my_mac1 = %d " % my_mac1)
 
-		pwd = self.password.get()
 
-		if my_mac == enter1 or pwd == "9527123456":
+		if my_mac1 == enter2 or enter == "9527123456" or my_mac == enter1:
 			print(" 校验正确")
 			#self.excel_sheet.write(8, 0, enter1)
 			#self.ExcelFile_auto_click.save('auto_click.xls')
@@ -107,4 +114,4 @@ class LoginPage(object):
 	def aotu_verify(self):
 		temp = self.keys_confirm()
 		
-		return self.Encryption_algorithms(temp)
+		return self.Encryption_algorithms(0, temp)

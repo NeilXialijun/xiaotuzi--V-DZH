@@ -743,7 +743,7 @@ class Application(object):
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了3， 睡觉了。。。。请关闭程序。。")
                logging.info("最后几期  不下了3， 睡觉了。。。。请关闭程序。。")
-               self.not_neet_bet3 = 0
+               self.not_neet_bet3 = 1
                #self.stop_thread()
                
             self.bet_count3 = 0     
@@ -763,7 +763,7 @@ class Application(object):
             if now_hour == 3 and now_minute > 14:
                print("最后几期  4  不下了， 睡觉了。。。。请关闭程序。。")
                logging.info("最后几期  4  不下了， 睡觉了。。。。请关闭程序。。")
-               self.not_neet_bet4 = 0
+               self.not_neet_bet4 = 1
                #self.stop_thread()
                
             self.bet_count4 = 0     
@@ -783,7 +783,7 @@ class Application(object):
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了5， 睡觉了。。。。请关闭程序。。")
                logging.info("最后几期  不下了3， 睡觉了。。。。请关闭程序。。")
-               self.not_neet_bet5 = 0
+               self.not_neet_bet5 = 1
                #self.stop_thread()
                
             self.bet_count5 = 0     
@@ -803,7 +803,7 @@ class Application(object):
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了6， 睡觉了。。。。请关闭程序。。")
                logging.info("最后几期  不下了6， 睡觉了。。。。请关闭程序。。")
-               self.not_neet_bet6 = 0
+               self.not_neet_bet6 = 1
                
             self.bet_count6 = 0     
             self.results_not_count6 = 0
@@ -822,7 +822,7 @@ class Application(object):
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了7， 睡觉了。。。。请关闭程序。。")
                logging.info("最后几期  不下了7， 睡觉了。。。。请关闭程序。。")
-               self.not_neet_bet7 = 0
+               self.not_neet_bet7 = 1
                #self.stop_thread()
                
             self.bet_count7 = 0     
@@ -842,7 +842,7 @@ class Application(object):
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了8， 睡觉了。。。。请关闭程序。。")
                logging.info("最后几期  不下了8， 睡觉了。。。。请关闭程序。。")
-               self.not_neet_bet8 = 0
+               self.not_neet_bet8 = 1
                #self.stop_thread()
                
             self.bet_count8 = 0     
