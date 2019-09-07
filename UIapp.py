@@ -702,6 +702,7 @@ class Application(object):
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute
             if now_hour == 3 and now_minute > 14 and self.M_list[self.bet_count] == 0:
+
                print("最后几期  不下了1， 睡觉了。。。。请关闭程序。。")
                logging.info("第一组  最后几 期  不压了 ！！ 睡觉了")
                self.not_neet_bet1 = 1        
