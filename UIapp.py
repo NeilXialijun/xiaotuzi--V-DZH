@@ -695,19 +695,16 @@ class Application(object):
         if results[temp1] in self.num_list:
             print("Z J....！！！！！")
             logging.info("Z j  1111  1")
-            marked = 1
-            now_hour = datetime.datetime.now().hour
-            now_minute = datetime.datetime.now().minute
-
-            if now_hour == 3 and now_minute > 14:
-               print("最后几期  不下了1， 睡觉了。。。。请关闭程序。。")
-               logging.info("第一组  最后几 期  不压了 ！！ 睡觉了")
-               self.not_neet_bet1 = 1
-               #self.stop_thread()
-
+            #marked = 1
             self.bet_count = 0
             self.results_not_count = 0
         else:
+            now_hour = datetime.datetime.now().hour
+            now_minute = datetime.datetime.now().minute
+            if now_hour == 3 and now_minute > 14:
+               print("最后几期  不下了1， 睡觉了。。。。请关闭程序。。")
+               logging.info("第一组  最后几 期  不压了 ！！ 睡觉了")
+               self.not_neet_bet1 = 1        
             self.results_not_count = self.results_not_count + 1
            
             
@@ -717,18 +714,16 @@ class Application(object):
             print("第2组  为null")
         elif results[temp1] in self.num_list2:
             print("Z J 2....！！！！！")
-            logging.info("Z J 2....！！！！！")
+            logging.info("Z J 2....！！！！！")               
+            self.bet_count2 = 0
+            self.results_not_count2 = 0    
+        else:
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了2， 睡觉了。。。。请关闭程序。。")
                logging.info("最后几期  不下了2， 睡觉了。。。。请关闭程序。。")
-               self.not_neet_bet2 = 1
-               #self.stop_thread()
-               
-            self.bet_count2 = 0
-            self.results_not_count2 = 0    
-        else:
+               self.not_neet_bet2 = 1        
             self.results_not_count2 = self.results_not_count2 + 1
 
         # ZJ 3 判断      ===========================333333333333333333===============================================
@@ -737,18 +732,16 @@ class Application(object):
             logging.info("第3组  为null")
         elif results[temp1] in self.num_list3:
             print("Z J 3....！！！！！")
-            logging.info("Z J 3....！！！！！")
+            logging.info("Z J 3....！！！！！")             
+            self.bet_count3 = 0     
+            self.results_not_count3 = 0
+        else:
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了3， 睡觉了。。。。请关闭程序。。")
                logging.info("最后几期  不下了3， 睡觉了。。。。请关闭程序。。")
-               self.not_neet_bet3 = 1
-               #self.stop_thread()
-               
-            self.bet_count3 = 0     
-            self.results_not_count3 = 0
-        else:
+               self.not_neet_bet3 = 1        
             self.results_not_count3 = self.results_not_count3 + 1
             
         # ZJ 4 判断      ===========================44444444444444444===============================================
@@ -757,18 +750,16 @@ class Application(object):
             logging.info("第4组  为null")
         elif results[temp1] in self.num_list4:
             print("Z J 4....！！！！！")
-            logging.info("Z J 4....！！！！！")
+            logging.info("Z J 4....！！！！！")              
+            self.bet_count4 = 0     
+            self.results_not_count4 = 0           
+        else:
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
                print("最后几期  4  不下了， 睡觉了。。。。请关闭程序。。")
                logging.info("最后几期  4  不下了， 睡觉了。。。。请关闭程序。。")
-               self.not_neet_bet4 = 1
-               #self.stop_thread()
-               
-            self.bet_count4 = 0     
-            self.results_not_count4 = 0           
-        else:
+               self.not_neet_bet4 = 1        
             self.results_not_count4 = self.results_not_count4 + 1
  
         # ZJ 5 判断      ===========================555555555555555===============================================
@@ -777,18 +768,17 @@ class Application(object):
             logging.info("第5组  为null")
         elif results[temp1] in self.num_list5:
             print("Z J 5....！！！！！")
-            logging.info("Z J 5....！！！！！")
+            logging.info("Z J 5....！！！！！")              
+            self.bet_count5 = 0     
+            self.results_not_count5 = 0
+        else:
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了5， 睡觉了。。。。请关闭程序。。")
                logging.info("最后几期  不下了3， 睡觉了。。。。请关闭程序。。")
                self.not_neet_bet5 = 1
-               #self.stop_thread()
-               
-            self.bet_count5 = 0     
-            self.results_not_count5 = 0
-        else:
+      
             self.results_not_count5 = self.results_not_count5 + 1
             
         # ZJ 6 判断      ===========================666666666666666666===============================================
@@ -797,7 +787,10 @@ class Application(object):
             logging.info("第6组  为null")
         elif results[temp1] in self.num_list6:
             print("Z J 6....！！！！！")
-            logging.info("Z J 6....！！！！！")
+            logging.info("Z J 6....！！！！！")           
+            self.bet_count6 = 0     
+            self.results_not_count6 = 0
+        else:
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
@@ -805,9 +798,6 @@ class Application(object):
                logging.info("最后几期  不下了6， 睡觉了。。。。请关闭程序。。")
                self.not_neet_bet6 = 1
                
-            self.bet_count6 = 0     
-            self.results_not_count6 = 0
-        else:
             self.results_not_count6 = self.results_not_count6 + 1
 
         # ZJ 7 判断      ===========================77777777777777777===============================================
@@ -817,17 +807,15 @@ class Application(object):
         elif results[temp1] in self.num_list7:
             print("Z J 7....！！！！！")
             logging.info("Z J 7....！！！！！")
+            self.bet_count7 = 0     
+            self.results_not_count7 = 0
+        else:
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了7， 睡觉了。。。。请关闭程序。。")
                logging.info("最后几期  不下了7， 睡觉了。。。。请关闭程序。。")
-               self.not_neet_bet7 = 1
-               #self.stop_thread()
-               
-            self.bet_count7 = 0     
-            self.results_not_count7 = 0
-        else:
+               self.not_neet_bet7 = 1        
             self.results_not_count7 = self.results_not_count7 + 1
 
         # ZJ 8 判断      ===========================888888888888888888===============================================
@@ -836,18 +824,16 @@ class Application(object):
             logging.info("第8组  为null")
         elif results[temp1] in self.num_list8:
             print("Z J 8....！！！！！")
-            logging.info("Z J 8....！！！！！")
+            logging.info("Z J 8....！！！！！") 
+            self.bet_count8 = 0     
+            self.results_not_count8 = 0
+        else:
             now_hour = datetime.datetime.now().hour
             now_minute = datetime.datetime.now().minute            
             if now_hour == 3 and now_minute > 14:
                print("最后几期  不下了8， 睡觉了。。。。请关闭程序。。")
                logging.info("最后几期  不下了8， 睡觉了。。。。请关闭程序。。")
-               self.not_neet_bet8 = 1
-               #self.stop_thread()
-               
-            self.bet_count8 = 0     
-            self.results_not_count8 = 0
-        else:
+               self.not_neet_bet8 = 1    
             self.results_not_count8 = self.results_not_count8 + 1            
             
  #================================================================================           
