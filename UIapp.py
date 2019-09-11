@@ -362,42 +362,49 @@ class Application(object):
             return None
 
         if self.num_list2 is '':
+            self.not_neet_bet2 = 1
             print("第二组没数据")
         else:
             self.num_list2 = self.num_list2.split('-', 5)
             self.num_list2 = list(map(int, self.num_list2))
 
         if self.num_list3 is '':
+            self.not_neet_bet3 = 1
             print("第三组没数据")
         else:
             self.num_list3 = self.num_list3.split('-', 5)
             self.num_list3 = list(map(int, self.num_list3))
             
         if self.num_list4 is'':
+            self.not_neet_bet4 = 1
             print("第四组没数据")
         else:
             self.num_list4 = self.num_list4.split('-', 5)
             self.num_list4 = list(map(int, self.num_list4))
 
         if self.num_list5 is'':
+            self.not_neet_bet5 = 1
             print("第五组没数据")
         else:
             self.num_list5 = self.num_list5.split('-', 5)
             self.num_list5 = list(map(int, self.num_list5))
 
         if self.num_list6 is'':
+            self.not_neet_bet6 = 1
             print("第六组没数据")
         else:
             self.num_list6 = self.num_list6.split('-', 5)
             self.num_list6 = list(map(int, self.num_list6))
 
         if self.num_list7 is'':
+            self.not_neet_bet7 = 1
             print("第七组没数据")
         else:
             self.num_list7 = self.num_list7.split('-', 5)
             self.num_list7 = list(map(int, self.num_list7))
 
         if self.num_list8 is'':
+            self.not_neet_bet8 = 1
             print("第八组没数据")
         else:
             self.num_list8 = self.num_list8.split('-', 5)
