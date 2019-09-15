@@ -718,6 +718,7 @@ class Application(object):
             
         # ZJ 2 判断 ===============22222222222222222222222222222222==============================================
         if isinstance(self.num_list2, str) is True:
+            not_neet_bet2 = 1
             logging.info("第2组  为null")
             print("第2组  为null")
         elif results[temp1] in self.num_list2:
@@ -736,6 +737,7 @@ class Application(object):
 
         # ZJ 3 判断      ===========================333333333333333333===============================================
         if isinstance(self.num_list3, str) is True:
+            not_neet_bet3 = 1
             print("第3组  为null")
             logging.info("第3组  为null")
         elif results[temp1] in self.num_list3:
@@ -754,6 +756,7 @@ class Application(object):
             
         # ZJ 4 判断      ===========================44444444444444444===============================================
         if isinstance(self.num_list4, str) is True:
+            not_neet_bet4 = 1
             print("第4组  为null")
             logging.info("第4组  为null")
         elif results[temp1] in self.num_list4:
@@ -772,6 +775,7 @@ class Application(object):
  
         # ZJ 5 判断      ===========================555555555555555===============================================
         if isinstance(self.num_list5, str) is True:
+            not_neet_bet5 = 1
             print("第5组  为null")
             logging.info("第5组  为null")
         elif results[temp1] in self.num_list5:
@@ -791,6 +795,7 @@ class Application(object):
             
         # ZJ 6 判断      ===========================666666666666666666===============================================
         if isinstance(self.num_list6, str) is True:
+            not_neet_bet6 = 1
             print("第6组  为null")
             logging.info("第6组  为null")
         elif results[temp1] in self.num_list6:
@@ -810,6 +815,7 @@ class Application(object):
 
         # ZJ 7 判断      ===========================77777777777777777===============================================
         if isinstance(self.num_list7, str) is True:
+            not_neet_bet7 = 1
             print("第7组  为null")
             logging.info("第7组  为null")
         elif results[temp1] in self.num_list7:
@@ -828,6 +834,7 @@ class Application(object):
 
         # ZJ 8 判断      ===========================888888888888888888===============================================
         if isinstance(self.num_list8, str) is True:
+            not_neet_bet8 = 1
             print("第8组  为null")
             logging.info("第8组  为null")
         elif results[temp1] in self.num_list8:
