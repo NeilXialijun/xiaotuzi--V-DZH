@@ -365,49 +365,49 @@ class Application(object):
             self.not_neet_bet2 = 1
             print("第二组没数据")
         else:
-            self.num_list2 = self.num_list2.split('-', 5)
+            self.num_list2 = self.num_list2.split('-', 8)
             self.num_list2 = list(map(int, self.num_list2))
 
         if self.num_list3 is '':
             self.not_neet_bet3 = 1
             print("第三组没数据")
         else:
-            self.num_list3 = self.num_list3.split('-', 5)
+            self.num_list3 = self.num_list3.split('-', 8)
             self.num_list3 = list(map(int, self.num_list3))
             
         if self.num_list4 is'':
             self.not_neet_bet4 = 1
             print("第四组没数据")
         else:
-            self.num_list4 = self.num_list4.split('-', 5)
+            self.num_list4 = self.num_list4.split('-', 8)
             self.num_list4 = list(map(int, self.num_list4))
 
         if self.num_list5 is'':
             self.not_neet_bet5 = 1
             print("第五组没数据")
         else:
-            self.num_list5 = self.num_list5.split('-', 5)
+            self.num_list5 = self.num_list5.split('-', 8)
             self.num_list5 = list(map(int, self.num_list5))
 
         if self.num_list6 is'':
             self.not_neet_bet6 = 1
             print("第六组没数据")
         else:
-            self.num_list6 = self.num_list6.split('-', 5)
+            self.num_list6 = self.num_list6.split('-', 8)
             self.num_list6 = list(map(int, self.num_list6))
 
         if self.num_list7 is'':
             self.not_neet_bet7 = 1
             print("第七组没数据")
         else:
-            self.num_list7 = self.num_list7.split('-', 5)
+            self.num_list7 = self.num_list7.split('-', 8)
             self.num_list7 = list(map(int, self.num_list7))
 
         if self.num_list8 is'':
             self.not_neet_bet8 = 1
             print("第八组没数据")
         else:
-            self.num_list8 = self.num_list8.split('-', 5)
+            self.num_list8 = self.num_list8.split('-', 8)
             self.num_list8 = list(map(int, self.num_list8))
 
 
@@ -415,7 +415,7 @@ class Application(object):
             self.e9.insert(0, "请输入M值，格式 1-2-3...")
             print("获取M 值错误")
             return None
-        self.num_list = self.num_list.split('-', 5)
+        self.num_list = self.num_list.split('-', 8)
         try:
             self.num_list = list(map(int, self.num_list))
         except ValueError:
@@ -604,6 +604,11 @@ class Application(object):
                 starttime = datetime.datetime.now().replace(hour=13, minute=4)
                 
             endtime = datetime.datetime.now()
+            d_time1 = datetime.datetime.strptime(str(datetime.datetime.now().date())+'4:18', '%Y-%m-%d%H:%M')
+            
+            if(endtime == d_time1):
+                self.frm.quit()
+
 
             count = (endtime - starttime).total_seconds() / 60
             
